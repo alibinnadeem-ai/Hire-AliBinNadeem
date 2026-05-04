@@ -159,7 +159,7 @@ async function notifyContact(data) {
       <p>Thank you for your consulting enquiry. I have received your message and will review it carefully before responding within <strong>24 hours</strong>.</p>
       <p style="margin-top:24px">
         <a href="https://www.linkedin.com/in/alibinnadeem/" style="background:#0066cc;color:#fff;padding:10px 20px;border-radius:30px;text-decoration:none;font-size:13px;margin-right:8px">LinkedIn</a>
-        <a href="https://wa.me/923008540914" style="border:1px solid #0066cc;color:#0066cc;padding:10px 20px;border-radius:30px;text-decoration:none;font-size:13px">WhatsApp</a>
+        <a href="https://wa.me/14085001113" style="border:1px solid #0066cc;color:#0066cc;padding:10px 20px;border-radius:30px;text-decoration:none;font-size:13px">WhatsApp</a>
       </p>
       <p style="margin-top:24px;color:#888;font-size:12px">Rawalpindi · Islamabad · Silicon Valley · Qatar</p>
     </div>`,
