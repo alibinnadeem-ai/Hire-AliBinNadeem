@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ali Bin Nadeem — Technology Consultant · Entrepreneur · Leader</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#0066cc;--sky:#2997ff;--glow:#2997ff;
+  --ink:#1d1d1f;--white:#fff;--parch:#f0f0f2;
+  --d1:#0d0d0f;--d2:#111113;--d3:#090909;
+  --muted:rgba(255,255,255,.38);--div:rgba(255,255,255,.07);
+  --card-bg:rgba(255,255,255,.035);
+  --r-pill:980px;--r-card:20px;
+}
+html{scroll-behavior:smooth}
+body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--d1);color:#fff;-webkit-font-smoothing:antialiased;overflow-x:hidden;cursor:none}
+
+/* ── CUSTOM CURSOR ── */
+#cursor{position:fixed;z-index:9999;pointer-events:none;mix-blend-mode:screen}
+#cur-dot{width:8px;height:8px;background:#fff;border-radius:50%;position:fixed;transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s;pointer-events:none;z-index:9999}
+#cur-ring{width:36px;height:36px;border:1px solid rgba(41,151,255,.6);border-radius:50%;position:fixed;transform:translate(-50%,-50%);pointer-events:none;z-index:9998;transition:width .3s,height .3s,border-color .3s;box-shadow:0 0 12px rgba(41,151,255,.3)}
+body:hover #cur-ring{opacity:1}
+.tilt-card:hover~#cursor #cur-dot,a:hover~#cursor #cur-dot{width:14px;height:14px;background:var(--sky)}
+
+/* ── NAV ── */
+#gnav{
+  position:fixed;top:0;left:0;right:0;z-index:800;
+  background:rgba(0,0,0,.7);backdrop-filter:saturate(180%) blur(24px);
+  height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;
+  border-bottom:1px solid rgba(255,255,255,.05)
+}
+.logo{font-family:"Syne",sans-serif;font-size:16px;font-weight:700;color:#fff;letter-spacing:-.3px;text-decoration:none;position:relative}
+.logo::after{content:"";position:absolute;bottom:-2px;left:0;width:0;height:1px;background:var(--sky);transition:width .3s}
+.logo:hover::after{width:100%}
+#gnav ul{display:flex;gap:24px;list-style:none}
+#gnav ul a{font-size:12px;color:rgba(255,255,255,.65);text-decoration:none;letter-spacing:.02em;transition:color .2s;font-weight:500}
+#gnav ul a:hover{color:#fff}
+.ncta{background:linear-gradient(135deg,var(--blue),#0099ff);color:#fff;font-size:12px;font-weight:500;padding:7px 18px;border-radius:var(--r-pill);text-decoration:none;transition:transform .15s,box-shadow .2s;box-shadow:0 0 20px rgba(0,102,204,.4)}
+.ncta:hover{transform:scale(1.04);box-shadow:0 0 30px rgba(41,151,255,.6)}
+@media(max-width:767px){#gnav ul{display:none}}
+
+/* ── HERO ── */
+#hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:hidden}
+#hero-canvas{position:absolute;inset:0;z-index:0}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(41,151,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(41,151,255,.04) 1px,transparent 1px);background-size:60px 60px;z-index:1;mask-image:radial-gradient(ellipse 80% 60% at 50% 50%,black,transparent)}
+.hero-inner{position:relative;z-index:2;padding:120px 24px 80px}
+.h-ey{font-family:"Syne",sans-serif;font-size:11px;font-weight:600;color:var(--sky);letter-spacing:.22em;text-transform:uppercase;margin-bottom:24px;opacity:0;animation:fU .9s .2s ease forwards;display:flex;align-items:center;justify-content:center;gap:12px}
+.h-ey::before,.h-ey::after{content:"";width:32px;height:1px;background:linear-gradient(90deg,transparent,var(--sky))}
+.h-ey::after{transform:scaleX(-1)}
+#hero h1{font-family:"Syne",sans-serif;font-size:clamp(48px,8vw,96px);font-weight:800;color:#fff;letter-spacing:-.04em;line-height:1;margin-bottom:6px;opacity:0;animation:fU .9s .35s ease forwards;text-shadow:0 0 80px rgba(41,151,255,.2)}
+#hero h1 .accent{background:linear-gradient(135deg,#fff 30%,var(--sky) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub-title{font-family:"Syne",sans-serif;font-size:clamp(28px,4vw,48px);font-weight:600;color:rgba(255,255,255,.22);letter-spacing:-.03em;margin-bottom:24px;opacity:0;animation:fU .9s .45s ease forwards}
+.hs{font-size:clamp(15px,2vw,18px);font-weight:300;color:rgba(255,255,255,.55);line-height:1.65;max-width:600px;margin:0 auto 48px;opacity:0;animation:fU .9s .55s ease forwards}
+.hctas{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;opacity:0;animation:fU .9s .7s ease forwards}
+
+/* ── BUTTONS ── */
+.bp{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--blue),#0099ff);color:#fff;font-size:15px;font-weight:500;padding:13px 30px;border-radius:var(--r-pill);text-decoration:none;border:none;cursor:none;transition:transform .15s,box-shadow .2s;box-shadow:0 4px 24px rgba(0,102,204,.4);letter-spacing:-.01em}
+.bp:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 8px 40px rgba(41,151,255,.5)}
+.bp:active{transform:scale(.97)}
+.bg{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.05);color:#fff;font-size:15px;font-weight:400;padding:13px 30px;border-radius:var(--r-pill);border:1px solid rgba(255,255,255,.15);text-decoration:none;cursor:none;transition:transform .15s,background .2s,border-color .2s;letter-spacing:-.01em;backdrop-filter:blur(8px)}
+.bg:hover{transform:translateY(-2px);background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.3)}
+
+/* ── SCROLL INDICATOR ── */
+.scroll-h{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fI 1s 1.4s ease forwards;z-index:2}
+.scroll-h span{font-size:10px;color:rgba(255,255,255,.3);letter-spacing:.14em;text-transform:uppercase}
+.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,rgba(41,151,255,.6),transparent);animation:scrollPulse 2s infinite}
+
+/* ── STATS STRIP ── */
+#stats{background:var(--d2);display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--div);border-bottom:1px solid var(--div)}
+.si{text-align:center;padding:48px 16px;border-right:1px solid var(--div);position:relative;overflow:hidden}
+.si::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 120%,rgba(41,151,255,.06),transparent);opacity:0;transition:opacity .4s}
+.si:hover::before{opacity:1}
+.si:last-child{border-right:none}
+.sn{font-family:"Syne",sans-serif;font-size:clamp(36px,4vw,52px);font-weight:800;color:#fff;letter-spacing:-.04em;display:block;margin-bottom:6px;background:linear-gradient(135deg,#fff,var(--sky));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sl{font-size:12px;color:rgba(255,255,255,.4);letter-spacing:.06em;text-transform:uppercase;font-weight:500}
+
+/* ── SECTION SHARED ── */
+.tile{width:100%;position:relative;overflow:hidden}
+.tc{max-width:900px;margin:0 auto;padding:96px 24px 64px;text-align:center}
+.eyebrow{font-size:11px;font-weight:600;color:var(--sky);letter-spacing:.18em;text-transform:uppercase;margin-bottom:14px;display:block;font-family:"DM Sans",sans-serif}
+.th{font-family:"Syne",sans-serif;font-size:clamp(34px,5vw,56px);font-weight:800;letter-spacing:-.04em;line-height:1.05;margin-bottom:18px;color:#fff}
+.th .dim{color:rgba(255,255,255,.2)}
+.tsub{font-size:17px;font-weight:300;line-height:1.6;color:rgba(255,255,255,.48);max-width:600px;margin:0 auto 52px}
+
+/* ── 3D PERSPECTIVE WRAPPER ── */
+.perspective-grid{perspective:1000px;perspective-origin:50% 50%}
+
+/* ── VENTURE / CAPABILITY CARDS ── */
+.vg{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1200px;margin:0 auto;padding:0 24px 96px}
+.tilt-card{
+  background:var(--card-bg);
+  border:1px solid var(--div);
+  border-radius:var(--r-card);
+  padding:28px;
+  cursor:none;
+  position:relative;overflow:hidden;
+  transform-style:preserve-3d;
+  transition:box-shadow .3s;
+  will-change:transform;
+}
+.tilt-card::before{
+  content:"";position:absolute;inset:0;border-radius:var(--r-card);
+  background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(41,151,255,.12),transparent 60%);
+  opacity:0;transition:opacity .3s;z-index:0;pointer-events:none
+}
+.tilt-card:hover::before{opacity:1}
+.tilt-card:hover{box-shadow:0 20px 60px rgba(0,0,0,.6),0 0 0 1px rgba(41,151,255,.2),inset 0 1px 0 rgba(255,255,255,.08)}
+.tilt-card>*{position:relative;z-index:1}
+.vi{font-size:36px;margin-bottom:14px;display:block;filter:drop-shadow(0 0 12px rgba(41,151,255,.3))}
+.vn{font-family:"Syne",sans-serif;font-size:16px;font-weight:700;color:#fff;letter-spacing:-.02em;margin-bottom:7px}
+.vd{font-size:13px;color:rgba(255,255,255,.48);line-height:1.55;margin-bottom:14px}
+.vl{font-size:12px;color:var(--sky);display:flex;align-items:center;gap:5px;font-weight:500}
+
+/* ── GLOWING DIVIDER ── */
+.glow-div{height:1px;background:linear-gradient(90deg,transparent,rgba(41,151,255,.4),transparent);margin:0;border:none}
+
+/* ── TIMELINE 3D ── */
+.eg{max-width:860px;margin:0 auto;padding:0 24px 96px;position:relative}
+.eg::before{content:"";position:absolute;left:calc(160px + 8px);top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,rgba(41,151,255,.3) 10%,rgba(41,151,255,.3) 90%,transparent);pointer-events:none}
+.ei{display:grid;grid-template-columns:168px 1fr;gap:0;padding:24px 0 24px 0;cursor:none;position:relative;transition:transform .2s}
+.ei::before{content:"";position:absolute;left:calc(160px + 4px);top:50%;width:10px;height:10px;background:var(--d1);border:2px solid rgba(41,151,255,.4);border-radius:50%;transform:translateY(-50%);transition:background .2s,border-color .2s,box-shadow .2s}
+.ei:hover{transform:translateX(4px)}
+.ei:hover::before{background:var(--sky);border-color:var(--sky);box-shadow:0 0 12px rgba(41,151,255,.6)}
+.edate{font-size:11px;color:rgba(255,255,255,.3);letter-spacing:.04em;padding-top:5px;padding-right:28px;text-align:right;line-height:1.4;font-weight:500}
+.ebody{padding-left:28px;border-left:none}
+.erole{font-family:"Syne",sans-serif;font-size:16px;font-weight:700;color:#fff;letter-spacing:-.02em;margin-bottom:3px}
+.eco{font-size:13px;color:var(--sky);letter-spacing:-.01em;margin-bottom:6px;font-weight:500}
+.edesc{font-size:13px;color:rgba(255,255,255,.42);line-height:1.55}
+.elink{font-size:12px;color:rgba(41,151,255,.7);margin-top:7px;display:inline-block;letter-spacing:.02em;font-weight:500}
+.ei:hover .elink{color:var(--sky)}
+
+/* ── EXPERTISE GRID ── */
+.xg{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1100px;margin:0 auto;padding:0 24px 96px}
+.xc{background:var(--card-bg);border-radius:var(--r-card);padding:28px;border:1px solid var(--div);cursor:none;position:relative;overflow:hidden;transform-style:preserve-3d;transition:box-shadow .3s;will-change:transform}
+.xc::before{content:"";position:absolute;inset:0;border-radius:var(--r-card);background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(41,151,255,.1),transparent 55%);opacity:0;transition:opacity .3s;pointer-events:none}
+.xc:hover::before{opacity:1}
+.xc:hover{box-shadow:0 20px 50px rgba(0,0,0,.5),0 0 0 1px rgba(41,151,255,.18)}
+.xc>*{position:relative;z-index:1}
+.xi{font-size:30px;margin-bottom:13px;display:block;filter:drop-shadow(0 0 10px rgba(41,151,255,.3))}
+.xt{font-family:"Syne",sans-serif;font-size:15px;font-weight:700;letter-spacing:-.02em;margin-bottom:10px;color:#fff}
+.xl{list-style:none;display:flex;flex-direction:column;gap:6px}
+.xl li{font-size:12.5px;color:rgba(255,255,255,.45);padding-left:14px;position:relative;line-height:1.45}
+.xl li::before{content:"";position:absolute;left:0;top:7px;width:5px;height:1px;background:var(--sky)}
+.cap-cta{font-size:12px;color:var(--sky);margin-top:14px;display:inline-block;font-weight:500;opacity:.8}
+
+/* ── PROJECTS GRID ── */
+.pg{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:1100px;margin:0 auto;padding:0 24px 96px}
+.pc{background:var(--card-bg);border-radius:var(--r-card);border:1px solid var(--div);padding:26px;text-decoration:none;color:inherit;cursor:none;position:relative;overflow:hidden;transition:border-color .2s,background .2s,transform .2s}
+.pc::after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(41,151,255,.06),transparent);opacity:0;transition:opacity .3s}
+.pc:hover{border-color:rgba(41,151,255,.3);background:rgba(41,151,255,.04);transform:translateY(-3px)}
+.pc:hover::after{opacity:1}
+.pcat{font-size:10px;font-weight:600;color:var(--sky);letter-spacing:.14em;text-transform:uppercase;margin-bottom:9px}
+.pn{font-family:"Syne",sans-serif;font-size:17px;font-weight:700;color:#fff;letter-spacing:-.02em;margin-bottom:7px}
+.pd{font-size:13px;color:rgba(255,255,255,.42);line-height:1.5;margin-bottom:14px}
+.parr{font-size:13px;color:var(--sky);font-weight:500}
+
+/* ── PUBLICATIONS ── */
+.pubg{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:1000px;margin:0 auto;padding:0 24px 96px}
+.pubc{background:var(--card-bg);border:1px solid var(--div);border-radius:var(--r-card);padding:24px;text-decoration:none;color:inherit;display:block;transition:border-color .2s,transform .2s;cursor:none}
+.pubc:hover{border-color:rgba(41,151,255,.3);transform:translateY(-2px)}
+.pubt{font-family:"Syne",sans-serif;font-size:14px;font-weight:700;color:#fff;letter-spacing:-.01em;margin-bottom:6px;line-height:1.35}
+.pubp{font-size:11px;color:var(--sky);margin-bottom:6px;font-weight:500;letter-spacing:.02em}
+.pubd{font-size:12.5px;color:rgba(255,255,255,.38);line-height:1.5}
+
+/* ── EDUCATION ── */
+.eduG{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1100px;margin:0 auto;padding:0 24px 96px}
+.educ{background:var(--card-bg);border-radius:var(--r-card);padding:28px;border:1px solid var(--div);position:relative;overflow:hidden;transition:border-color .2s;cursor:none;text-decoration:none;display:block;color:inherit}
+.educ::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--sky),transparent);opacity:0;transition:opacity .3s}
+.educ:hover{border-color:rgba(41,151,255,.25)}
+.educ:hover::before{opacity:1}
+.edud{font-family:"Syne",sans-serif;font-size:16px;font-weight:700;letter-spacing:-.02em;margin-bottom:6px;line-height:1.3;color:#fff}
+.edus{font-size:13px;color:var(--sky);margin-bottom:6px;font-weight:500}
+.eduy{font-size:12px;color:rgba(255,255,255,.35)}
+
+/* ── CERT CHIPS ── */
+.chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;max-width:880px;margin:0 auto;padding:0 24px 96px}
+.chip{background:rgba(41,151,255,.08);border:1px solid rgba(41,151,255,.2);border-radius:var(--r-pill);padding:8px 18px;font-size:12.5px;color:var(--sky);white-space:nowrap;text-decoration:none;transition:background .2s,border-color .2s,transform .2s;cursor:none;font-weight:500}
+.chip:hover{background:rgba(41,151,255,.16);border-color:rgba(41,151,255,.45);transform:translateY(-2px)}
+
+/* ── AFFILIATIONS ── */
+.afg{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:1100px;margin:0 auto;padding:0 24px 96px}
+.afc{background:var(--card-bg);border-radius:var(--r-card);border:1px solid var(--div);padding:22px;text-align:center;text-decoration:none;display:block;color:inherit;transition:border-color .2s,transform .2s;cursor:none}
+.afc:hover{border-color:rgba(41,151,255,.3);transform:translateY(-3px)}
+.afi{font-size:26px;margin-bottom:9px;display:block}
+.afn{font-family:"Syne",sans-serif;font-size:13px;font-weight:700;letter-spacing:-.01em;margin-bottom:4px;color:#fff}
+.afr{font-size:11px;color:rgba(255,255,255,.38);line-height:1.4}
+
+/* ── REAL ESTATE ── */
+.reg{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:1000px;margin:0 auto;padding:0 24px 96px}
+.rec{background:var(--card-bg);border:1px solid var(--div);border-radius:var(--r-card);padding:28px;cursor:none;position:relative;overflow:hidden;transition:border-color .2s,transform .2s;transform-style:preserve-3d;will-change:transform}
+.rec:hover{border-color:rgba(41,151,255,.3);transform:translateY(-4px)}
+.rei{font-size:30px;margin-bottom:11px;display:block;filter:drop-shadow(0 0 10px rgba(41,151,255,.3))}
+.ren{font-family:"Syne",sans-serif;font-size:18px;font-weight:700;color:#fff;letter-spacing:-.02em;margin-bottom:6px}
+.red{font-size:13px;color:rgba(255,255,255,.45);line-height:1.55}
+.rel{font-size:12px;color:var(--sky);margin-top:10px;display:block;font-weight:500}
+
+/* ── CONTACT ── */
+#contact{background:var(--d3);padding:140px 24px;text-align:center;position:relative;overflow:hidden}
+#contact::before{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(41,151,255,.07),transparent 70%);pointer-events:none}
+#contact h2{font-family:"Syne",sans-serif;font-size:clamp(40px,6vw,64px);font-weight:800;color:#fff;letter-spacing:-.04em;line-height:1.05;margin-bottom:18px;position:relative}
+#contact h2 .grd{background:linear-gradient(135deg,#fff 40%,var(--sky));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+#contact p{font-size:18px;font-weight:300;color:rgba(255,255,255,.45);margin:0 auto 48px;max-width:500px;line-height:1.6;position:relative}
+.clinks{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;position:relative}
+
+/* ── FOOTER ── */
+footer{background:#000;border-top:1px solid rgba(255,255,255,.05);padding:48px 24px}
+.fi{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);gap:28px}
+.fc h4{font-family:"Syne",sans-serif;font-size:11px;font-weight:700;color:#fff;letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
+.fc ul{list-style:none;display:flex;flex-direction:column;gap:2px}
+.fc ul li a{font-size:12px;color:rgba(255,255,255,.38);text-decoration:none;line-height:2.3;transition:color .2s;cursor:none}
+.fc ul li a:hover{color:var(--sky)}
+.fb{max-width:1100px;margin:32px auto 0;border-top:1px solid rgba(255,255,255,.05);padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.fb span{font-size:11px;color:rgba(255,255,255,.25);letter-spacing:.04em}
+
+/* ── MODAL ── */
+#modal-bg{display:none;position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.85);backdrop-filter:blur(16px);align-items:center;justify-content:center;padding:20px}
+#modal-bg.open{display:flex;animation:fI .25s ease}
+#modal{background:#111114;border:1px solid rgba(255,255,255,.08);border-radius:24px;width:100%;max-width:740px;max-height:88vh;overflow-y:auto;position:relative;padding:0;box-shadow:0 40px 80px rgba(0,0,0,.8),0 0 0 1px rgba(41,151,255,.1)}
+#modal-close{position:sticky;top:0;display:flex;justify-content:flex-end;padding:16px 20px 0;background:#111114;z-index:10;border-radius:24px 24px 0 0}
+#modal-close button{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.7);width:32px;height:32px;border-radius:50%;cursor:none;font-size:16px;display:flex;align-items:center;justify-content:center;transition:background .2s}
+#modal-close button:hover{background:rgba(255,255,255,.15);color:#fff}
+#modal-body{padding:8px 32px 44px}
+.mb-ey{font-size:10px;font-weight:600;color:var(--sky);letter-spacing:.18em;text-transform:uppercase;margin-bottom:10px;font-family:"DM Sans",sans-serif}
+.mb-h{font-family:"Syne",sans-serif;font-size:26px;font-weight:800;color:#fff;letter-spacing:-.03em;line-height:1.15;margin-bottom:8px}
+.mb-sub{font-size:14px;color:rgba(255,255,255,.45);margin-bottom:24px;line-height:1.5}
+.mb-sec{margin-top:24px}
+.mb-sec h4{font-size:10px;font-weight:600;color:var(--sky);text-transform:uppercase;letter-spacing:.14em;margin-bottom:10px;border-bottom:1px solid rgba(255,255,255,.06);padding-bottom:8px;font-family:"DM Sans",sans-serif}
+.mb-sec p{font-size:13.5px;color:rgba(255,255,255,.58);line-height:1.65;margin-bottom:8px}
+.mb-sec ul{list-style:none;display:flex;flex-direction:column;gap:7px;margin-bottom:10px}
+.mb-sec ul li{font-size:13.5px;color:rgba(255,255,255,.52);padding-left:16px;position:relative;line-height:1.45}
+.mb-sec ul li::before{content:"";position:absolute;left:0;top:8px;width:6px;height:1px;background:var(--sky)}
+.mb-stat{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}
+.mb-stat-i{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:14px;text-align:center}
+.mb-stat-i .n{font-family:"Syne",sans-serif;font-size:22px;font-weight:800;color:#fff;letter-spacing:-.03em}
+.mb-stat-i .l{font-size:10px;color:rgba(255,255,255,.35);margin-top:3px;letter-spacing:.04em}
+.mb-link{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,var(--blue),#0099ff);color:#fff;font-size:13px;font-weight:500;padding:9px 20px;border-radius:var(--r-pill);text-decoration:none;margin-top:12px;margin-right:8px;transition:transform .15s,box-shadow .2s;box-shadow:0 4px 16px rgba(0,102,204,.3);cursor:none}
+.mb-link:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(41,151,255,.4)}
+.mb-link-ghost{background:transparent;border:1px solid rgba(41,151,255,.35);color:var(--sky);box-shadow:none}
+.mb-link-ghost:hover{background:rgba(41,151,255,.08);box-shadow:none}
+.mb-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+.mb-chip{background:rgba(41,151,255,.08);border:1px solid rgba(41,151,255,.2);border-radius:var(--r-pill);padding:5px 13px;font-size:11.5px;color:var(--sky);font-weight:500}
+
+/* ── ANIMATIONS ── */
+@keyframes fU{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:none}}
+@keyframes fI{from{opacity:0}to{opacity:1}}
+@keyframes scrollPulse{0%,100%{opacity:.3;transform:scaleY(1)}50%{opacity:1;transform:scaleY(1.2)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.rev{opacity:0;transform:translateY(28px) translateZ(-20px);transition:opacity .7s ease,transform .7s ease}
+.rev.vis{opacity:1;transform:translateY(0) translateZ(0)}
+
+/* ── LIGHT SECTION ── */
+.light-sec{background:#fff;color:var(--ink)}
+.light-sec .th{color:var(--ink)}
+.light-sec .th .dim{color:rgba(0,0,0,.18)}
+.light-sec .tsub{color:rgba(0,0,0,.5)}
+.light-sec .eyebrow{color:var(--blue)}
+.light-sec .educ{background:#f8f8fa;border-color:rgba(0,0,0,.08)}
+.light-sec .educ:hover{border-color:rgba(0,102,204,.3)}
+.light-sec .edud{color:var(--ink)}
+.light-sec .edus{color:var(--blue)}
+.light-sec .eduy{color:rgba(0,0,0,.4)}
+.light-sec .educ::before{background:linear-gradient(90deg,transparent,var(--blue),transparent)}
+.light-sec .xc{background:#fff;border-color:rgba(0,0,0,.08)}
+.light-sec .xc::before{background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(0,102,204,.06),transparent 55%)}
+.light-sec .xc:hover{box-shadow:0 20px 50px rgba(0,0,0,.1),0 0 0 1px rgba(0,102,204,.15)}
+.light-sec .xt{color:var(--ink)}
+.light-sec .xl li{color:rgba(0,0,0,.5)}
+.light-sec .xl li::before{background:var(--blue)}
+.light-sec .cap-cta{color:var(--blue)}
+.light-sec .xi{filter:none}
+.light-sec .chip{background:rgba(0,102,204,.06);border-color:rgba(0,102,204,.18);color:var(--blue)}
+.light-sec .chip:hover{background:rgba(0,102,204,.12)}
+.light-sec .afg .afc{background:#fff;border-color:rgba(0,0,0,.08)}
+.light-sec .afn{color:var(--ink)}
+.light-sec .afr{color:rgba(0,0,0,.45)}
+
+/* ── RESPONSIVE ── */
+/* ── CONSULTING SECTION ── */
+.avail-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(52,199,89,.1);border:1px solid rgba(52,199,89,.3);border-radius:var(--r-pill);padding:8px 18px;font-size:12px;font-weight:600;color:#34c759;letter-spacing:.04em;margin-bottom:28px}
+.avail-dot{width:7px;height:7px;background:#34c759;border-radius:50%;animation:pulse-green 2s infinite}
+@keyframes pulse-green{0%,100%{box-shadow:0 0 0 0 rgba(52,199,89,.4)}70%{box-shadow:0 0 0 8px rgba(52,199,89,0)}}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1100px;margin:0 auto;padding:0 24px 64px}
+.svc-card{background:var(--card-bg);border:1px solid var(--div);border-radius:var(--r-card);padding:28px 26px;cursor:none;position:relative;overflow:hidden;transition:border-color .25s,transform .2s;transform-style:preserve-3d;will-change:transform}
+.svc-card::before{content:"";position:absolute;inset:0;border-radius:var(--r-card);background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(41,151,255,.1),transparent 55%);opacity:0;transition:opacity .3s;pointer-events:none}
+.svc-card:hover::before{opacity:1}
+.svc-card:hover{border-color:rgba(41,151,255,.3);transform:translateY(-4px)}
+.svc-card>*{position:relative;z-index:1}
+.svc-icon{font-size:32px;margin-bottom:14px;display:block;filter:drop-shadow(0 0 10px rgba(41,151,255,.3))}
+.svc-name{font-family:var(--ff-display);font-size:16px;font-weight:700;color:#fff;letter-spacing:-.02em;margin-bottom:8px}
+.svc-desc{font-size:13px;color:rgba(255,255,255,.46);line-height:1.6;margin-bottom:16px}
+.svc-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+.svc-tag{background:rgba(41,151,255,.08);border:1px solid rgba(41,151,255,.18);border-radius:var(--r-pill);padding:3px 10px;font-size:11px;color:var(--sky);font-weight:500}
+.svc-cta{font-size:12px;color:var(--sky);font-weight:600;letter-spacing:.04em;cursor:none}
+
+/* Process / How I work */
+.process-row{display:grid;grid-template-columns:repeat(4,1fr);gap:0;max-width:960px;margin:0 auto;padding:0 24px 64px;position:relative}
+.process-row::before{content:"";position:absolute;top:28px;left:calc(24px + 28px);right:calc(24px + 28px);height:1px;background:linear-gradient(90deg,transparent,rgba(41,151,255,.3),transparent);pointer-events:none}
+.proc-step{text-align:center;padding:0 16px}
+.proc-num{width:56px;height:56px;border-radius:50%;background:rgba(41,151,255,.08);border:1px solid rgba(41,151,255,.25);display:flex;align-items:center;justify-content:center;font-family:var(--ff-display);font-size:18px;font-weight:800;color:var(--sky);margin:0 auto 14px;position:relative;z-index:1;transition:background .25s,border-color .25s}
+.proc-step:hover .proc-num{background:rgba(41,151,255,.18);border-color:rgba(41,151,255,.5)}
+.proc-title{font-family:var(--ff-display);font-size:14px;font-weight:700;color:#fff;margin-bottom:6px;letter-spacing:-.01em}
+.proc-desc{font-size:12px;color:rgba(255,255,255,.38);line-height:1.5}
+
+/* Engagement models / pricing tiers */
+.engage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1000px;margin:0 auto;padding:0 24px 96px}
+.engage-card{background:var(--card-bg);border:1px solid var(--div);border-radius:var(--r-card);padding:28px;position:relative;overflow:hidden;transition:border-color .25s,transform .2s}
+.engage-card:hover{border-color:rgba(41,151,255,.3);transform:translateY(-4px)}
+.engage-card.featured{border-color:rgba(41,151,255,.4);background:rgba(41,151,255,.06)}
+.engage-card.featured::after{content:"POPULAR";position:absolute;top:18px;right:18px;background:var(--sky);color:#fff;font-size:9px;font-weight:700;letter-spacing:.12em;padding:3px 10px;border-radius:var(--r-pill)}
+.engage-tier{font-size:10px;font-weight:700;color:var(--sky);letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px}
+.engage-name{font-family:var(--ff-display);font-size:20px;font-weight:800;color:#fff;margin-bottom:6px;letter-spacing:-.02em}
+.engage-desc{font-size:13px;color:rgba(255,255,255,.45);line-height:1.55;margin-bottom:18px}
+.engage-features{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:22px}
+.engage-features li{font-size:13px;color:rgba(255,255,255,.55);padding-left:16px;position:relative;line-height:1.4}
+.engage-features li::before{content:"";position:absolute;left:0;top:8px;width:6px;height:1px;background:var(--sky)}
+.engage-btn{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,var(--blue),#0099ff);color:#fff;font-size:13px;font-weight:600;padding:10px 22px;border-radius:var(--r-pill);text-decoration:none;border:none;cursor:none;transition:transform .15s,box-shadow .2s;box-shadow:0 4px 16px rgba(0,102,204,.3);width:100%;justify-content:center}
+.engage-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(41,151,255,.4)}
+.engage-btn.ghost{background:transparent;border:1px solid rgba(41,151,255,.35);color:var(--sky);box-shadow:none}
+.engage-btn.ghost:hover{background:rgba(41,151,255,.08);box-shadow:none}
+
+/* Client types strip */
+.client-strip{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;max-width:800px;margin:0 auto 64px;padding:0 24px}
+.client-pill{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:var(--r-pill);padding:8px 18px;font-size:12.5px;color:rgba(255,255,255,.5);font-weight:500;transition:border-color .2s,color .2s}
+.client-pill:hover{border-color:rgba(41,151,255,.3);color:#fff}
+
+@media(max-width:1023px){.svc-grid{grid-template-columns:repeat(2,1fr)}.engage-grid{grid-template-columns:1fr}.process-row{grid-template-columns:repeat(2,1fr);gap:24px}.process-row::before{display:none}}
+@media(max-width:767px){.svc-grid{grid-template-columns:1fr}.process-row{grid-template-columns:1fr}}
+
+
+@media(max-width:1023px){.svc-grid{grid-template-columns:repeat(2,1fr)}.engage-grid{grid-template-columns:1fr}.process-row{grid-template-columns:repeat(2,1fr);gap:24px}.process-row::before{display:none}}
+@media(max-width:767px){.svc-grid{grid-template-columns:1fr}.process-row{grid-template-columns:1fr}}
+
+/* ── CONTACT ── */
+#contact{background:var(--d3);padding:140px 24px;text-align:center;position:relative;overflow:hidden}
+#contact::before{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(41,151,255,.07),transparent 70%);pointer-events:none}
+#contact h2{font-family:var(--ff-display);font-size:clamp(40px,6vw,64px);font-weight:800;color:#fff;letter-spacing:-.04em;line-height:1.05;margin-bottom:18px;position:relative}
+#contact h2 .grd{background:linear-gradient(135deg,#fff 40%,var(--sky));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+#contact p{font-size:18px;font-weight:300;color:rgba(255,255,255,.45);margin:0 auto 48px;max-width:500px;line-height:1.6;position:relative}
+.clinks{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;position:relative}
+
+/* ── FOOTER ── */
+footer{background:#000;border-top:1px solid rgba(255,255,255,.05);padding:48px 24px}
+.fi{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);gap:20px;align-items:start}
+.fc h4{font-family:var(--ff-display,"Syne",-apple-system,sans-serif);font-size:11px;font-weight:700;color:#fff;letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
+.fc ul{list-style:none;display:flex;flex-direction:column;gap:2px}
+.fc ul li a{font-size:12px;color:rgba(255,255,255,.38);text-decoration:none;line-height:2.3;transition:color .2s;cursor:none}
+.fc ul li a:hover{color:var(--sky)}
+.fb{max-width:1100px;margin:32px auto 0;border-top:1px solid rgba(255,255,255,.05);padding-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.fb span{font-size:11px;color:rgba(255,255,255,.25);letter-spacing:.04em}
+.fc h4{font-family:var(--ff-display);font-size:11px;font-weight:700;color:#fff;letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
+.fc ul{list-style:none;display:flex;flex-direction:column;gap:2px}
+.fc ul li a{font-size:12px;color:rgba(255,255,255,.38);text-decoration:none;line-height:2.3;transition:color .2s;cursor:none}
+.fc ul li a:hover{color:var(--sky)}
+.fb{max-width:1100px;margin:32px auto 0;border-top:1px solid rgba(255,255,255,.05);padding-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.fb span{font-size:11px;color:rgba(255,255,255,.25);letter-spacing:.04em}
+
+/* ── MODAL ── */
+#modal-bg{display:none;position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.85);backdrop-filter:blur(16px);align-items:center;justify-content:center;padding:20px}
+#modal-bg.open{display:flex;animation:fI .25s ease}
+#modal{background:#111114;border:1px solid rgba(255,255,255,.08);border-radius:24px;width:100%;max-width:740px;max-height:88vh;overflow-y:auto;position:relative;padding:0;box-shadow:0 40px 80px rgba(0,0,0,.8),0 0 0 1px rgba(41,151,255,.1)}
+#modal-close{position:sticky;top:0;display:flex;justify-content:flex-end;padding:16px 20px 0;background:#111114;z-index:10;border-radius:24px 24px 0 0}
+#modal-close button{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.7);width:32px;height:32px;border-radius:50%;cursor:none;font-size:16px;display:flex;align-items:center;justify-content:center;transition:background .2s}
+#modal-close button:hover{background:rgba(255,255,255,.15);color:#fff}
+#modal-body{padding:8px 32px 44px}
+.mb-ey{font-size:10px;font-weight:600;color:var(--sky);letter-spacing:.18em;text-transform:uppercase;margin-bottom:10px;font-family:"DM Sans",sans-serif}
+.mb-h{font-family:var(--ff-display);font-size:26px;font-weight:800;color:#fff;letter-spacing:-.03em;line-height:1.15;margin-bottom:8px}
+.mb-sub{font-size:14px;color:rgba(255,255,255,.45);margin-bottom:24px;line-height:1.5}
+.mb-sec{margin-top:24px}
+.mb-sec h4{font-size:10px;font-weight:600;color:var(--sky);text-transform:uppercase;letter-spacing:.14em;margin-bottom:10px;border-bottom:1px solid rgba(255,255,255,.06);padding-bottom:8px;font-family:"DM Sans",sans-serif}
+.mb-sec p{font-size:13.5px;color:rgba(255,255,255,.58);line-height:1.65;margin-bottom:8px}
+.mb-sec ul{list-style:none;display:flex;flex-direction:column;gap:7px;margin-bottom:10px}
+.mb-sec ul li{font-size:13.5px;color:rgba(255,255,255,.52);padding-left:16px;position:relative;line-height:1.45}
+.mb-sec ul li::before{content:"";position:absolute;left:0;top:8px;width:6px;height:1px;background:var(--sky)}
+.mb-stat{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}
+.mb-stat-i{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:14px;text-align:center}
+.mb-stat-i .n{font-family:var(--ff-display);font-size:22px;font-weight:800;color:#fff;letter-spacing:-.03em}
+.mb-stat-i .l{font-size:10px;color:rgba(255,255,255,.35);margin-top:3px;letter-spacing:.04em}
+.mb-link{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,var(--blue),#0099ff);color:#fff;font-size:13px;font-weight:500;padding:9px 20px;border-radius:var(--r-pill);text-decoration:none;margin-top:12px;margin-right:8px;transition:transform .15s,box-shadow .2s;box-shadow:0 4px 16px rgba(0,102,204,.3);cursor:none}
+.mb-link:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(41,151,255,.4)}
+.mb-link-ghost{background:transparent;border:1px solid rgba(41,151,255,.35);color:var(--sky);box-shadow:none}
+.mb-link-ghost:hover{background:rgba(41,151,255,.08);box-shadow:none}
+.mb-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+.mb-chip{background:rgba(41,151,255,.08);border:1px solid rgba(41,151,255,.2);border-radius:var(--r-pill);padding:5px 13px;font-size:11.5px;color:var(--sky);font-weight:500}
+
+/* ── ANIMATIONS ── */
+@keyframes fU{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:none}}
+@keyframes fI{from{opacity:0}to{opacity:1}}
+@keyframes scrollPulse{0%,100%{opacity:.3;transform:scaleY(1)}50%{opacity:1;transform:scaleY(1.2)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.rev{opacity:0;transform:translateY(28px) translateZ(-20px);transition:opacity .7s ease,transform .7s ease}
+.rev.vis{opacity:1;transform:translateY(0) translateZ(0)}
+
+/* ── LIGHT SECTION ── */
+.light-sec{background:#fff;color:var(--ink)}
+.light-sec .th{color:var(--ink)}
+.light-sec .th .dim{color:rgba(0,0,0,.18)}
+.light-sec .tsub{color:rgba(0,0,0,.5)}
+.light-sec .eyebrow{color:var(--blue)}
+.light-sec .educ{background:#f8f8fa;border-color:rgba(0,0,0,.08)}
+.light-sec .educ:hover{border-color:rgba(0,102,204,.3)}
+.light-sec .edud{color:var(--ink)}
+.light-sec .edus{color:var(--blue)}
+.light-sec .eduy{color:rgba(0,0,0,.4)}
+.light-sec .educ::before{background:linear-gradient(90deg,transparent,var(--blue),transparent)}
+.light-sec .xc{background:#fff;border-color:rgba(0,0,0,.08)}
+.light-sec .xc::before{background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(0,102,204,.06),transparent 55%)}
+.light-sec .xc:hover{box-shadow:0 20px 50px rgba(0,0,0,.1),0 0 0 1px rgba(0,102,204,.15)}
+.light-sec .xt{color:var(--ink)}
+.light-sec .xl li{color:rgba(0,0,0,.5)}
+.light-sec .xl li::before{background:var(--blue)}
+.light-sec .cap-cta{color:var(--blue)}
+.light-sec .xi{filter:none}
+.light-sec .chip{background:rgba(0,102,204,.06);border-color:rgba(0,102,204,.18);color:var(--blue)}
+.light-sec .chip:hover{background:rgba(0,102,204,.12)}
+.light-sec .afg .afc{background:#fff;border-color:rgba(0,0,0,.08)}
+.light-sec .afn{color:var(--ink)}
+.light-sec .afr{color:rgba(0,0,0,.45)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1023px){.vg,.xg{grid-template-columns:repeat(2,1fr)}.afg{grid-template-columns:repeat(2,1fr)}.fi{grid-template-columns:repeat(3,1fr)}#stats{grid-template-columns:repeat(2,1fr)}.si:nth-child(2){border-right:none}.si:nth-child(3){border-top:1px solid var(--div);border-right:1px solid var(--div)}.si:nth-child(4){border-top:1px solid var(--div);border-right:none}.eduG{grid-template-columns:repeat(2,1fr)}.eg::before{display:none}}
+@media(max-width:767px){.vg,.xg,.pg,.pubg,.reg{grid-template-columns:1fr}.ei{grid-template-columns:1fr}.edate{text-align:left;padding-right:0;margin-bottom:4px}.ebody{padding-left:0}.fi{grid-template-columns:repeat(2,1fr)}.eduG{grid-template-columns:1fr}.afg{grid-template-columns:repeat(2,1fr)}#cursor{display:none}body{cursor:auto}.tilt-card,.xc,.rec,.pc,.pubc,.educ,.afc,.chip,.bp,.bg,.ncta,.fc ul li a,.mb-link{cursor:pointer}}
+@media(max-width:479px){#stats{grid-template-columns:1fr}.si{border-right:none;border-bottom:1px solid var(--div)}.afg{grid-template-columns:1fr}.hctas{flex-direction:column;align-items:center}.fi{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- CUSTOM CURSOR -->
+<div id="cur-dot"></div>
+<div id="cur-ring"></div>
+
+<!-- NAV -->
+<nav id="gnav">
+  <a class="logo" href="#">Ali Bin Nadeem</a>
+  <ul>
+    <li><a href="#consulting">Consulting</a></li>
+    <li><a href="#ventures">Ventures</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#publications">Research</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a class="ncta" href="#consulting">Hire Me →</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <p class="h-ey">Technology Consultant · Entrepreneur · MS · ASM</p>
+    <h1><span class="accent">Transform.</span></h1>
+    <div class="hero-sub-title">Strategy. Systems. Scale.</div>
+    <p class="hs">CTO-level technology consulting across AI, real estate, defence &amp; healthcare — plus 21 operating ventures and 41 live products shipped from scratch.</p>
+    <div class="hctas">
+      <a class="bp" href="#consulting">Work With Me</a>
+      <a class="bg" href="#ventures">Explore Portfolio</a>
+    </div>
+  </div>
+  <div class="scroll-h"><span>Scroll</span><div class="scroll-line"></div></div>
+</section>
+
+<!-- STATS -->
+<div id="stats">
+  <div class="si rev"><span class="sn">15+</span><span class="sl">Years Experience</span></div>
+  <div class="si rev"><span class="sn">41</span><span class="sl">Live Projects</span></div>
+  <div class="si rev"><span class="sn">21</span><span class="sl">Ventures & Orgs</span></div>
+  <div class="si rev"><span class="sn">250+</span><span class="sl">Graduates Trained</span></div>
+</div>
+
+<section id="consulting" class="tile" style="background:var(--d3)">
+  <div class="tc rev">
+    <div class="avail-badge rev"><div class="avail-dot"></div>Available for Engagements</div>
+    <span class="eyebrow eyebrow-d">Consulting Services</span>
+    <h2 class="th th-w">The consultant<br><span class="dim">behind the ventures.</span></h2>
+    <p class="tsub tsub-d">15+ years of building, shipping, and scaling — now available to your organisation. CTO-level thinking without the full-time cost, embedding into your team to solve problems I've already solved for my own companies.</p>
+  </div>
+  <div class="client-strip rev">
+    <span class="client-pill">Startups & Scale-ups</span><span class="client-pill">Real Estate Developers</span><span class="client-pill">Defence & Government</span><span class="client-pill">Healthcare Organisations</span><span class="client-pill">Enterprise Corporates</span><span class="client-pill">Investment Funds</span><span class="client-pill">International NGOs</span><span class="client-pill">Training Institutions</span>
+  </div>
+  <div class="svc-grid perspective-grid">
+    <div class="tilt-card svc-card rev" onclick="openModal('svc-digital')"><span class="svc-icon">⚙️</span><div class="svc-name">Digital Transformation</div><div class="svc-desc">End-to-end enterprise modernisation — legacy audits, CRM/ERP deployment, workflow automation. Delivered for Grand City and ARD City across 17 operational domains.</div><div class="svc-tags"><span class="svc-tag">Strategy</span><span class="svc-tag">ERP/CRM</span><span class="svc-tag">Automation</span><span class="svc-tag">Change Mgmt</span></div><div class="svc-cta">Explore service →</div></div>
+    <div class="tilt-card svc-card rev" onclick="openModal('svc-ai')"><span class="svc-icon">🧠</span><div class="svc-name">AI Strategy & Product</div><div class="svc-desc">AI roadmapping, ML pipeline design, predictive analytics, and intelligent automation. From clinical AI to drone systems — I build AI into the core of your product, not as an afterthought.</div><div class="svc-tags"><span class="svc-tag">AI Roadmap</span><span class="svc-tag">ML Pipelines</span><span class="svc-tag">Product Strategy</span><span class="svc-tag">Predictive Analytics</span></div><div class="svc-cta">Explore service →</div></div>
+    <div class="tilt-card svc-card rev" onclick="openModal('svc-cto')"><span class="svc-icon">🎯</span><div class="svc-name">Fractional CTO</div><div class="svc-desc">Part-time CTO embedded in your leadership team. Technology strategy, vendor decisions, team structure, and delivery — without a full-time hire. Ideal for Series A/B and growing SMEs.</div><div class="svc-tags"><span class="svc-tag">Tech Leadership</span><span class="svc-tag">Team Building</span><span class="svc-tag">Architecture</span><span class="svc-tag">Fundraising Support</span></div><div class="svc-cta">Explore service →</div></div>
+    <div class="tilt-card svc-card rev" onclick="openModal('svc-proptech')"><span class="svc-icon">🏙️</span><div class="svc-name">Real Estate Tech & PropTech</div><div class="svc-desc">Smart city platforms, developer CRM/ERP, property management systems, utility dashboards, and RWA tokenization. Built live for Grand City, ARD City, and Syntiant Atlas.</div><div class="svc-tags"><span class="svc-tag">Smart City ERP</span><span class="svc-tag">PropTech</span><span class="svc-tag">Blockchain RWA</span><span class="svc-tag">CRM/CX</span></div><div class="svc-cta">Explore service →</div></div>
+    <div class="tilt-card svc-card rev" onclick="openModal('svc-defence')"><span class="svc-icon">🚁</span><div class="svc-name">Defence Technology Advisory</div><div class="svc-desc">UAV system design, counter-drone procurement, tactical technology strategy, and defence tech product management. Grounded in 15+ years co-founding Canis Technology Solutions.</div><div class="svc-tags"><span class="svc-tag">UAV Systems</span><span class="svc-tag">C-UAS</span><span class="svc-tag">Defence Procurement</span><span class="svc-tag">Tech Strategy</span></div><div class="svc-cta">Explore service →</div></div>
+    <div class="tilt-card svc-card rev" onclick="openModal('svc-healthcare')"><span class="svc-icon">🏥</span><div class="svc-name">Healthcare IT Consulting</div><div class="svc-desc">RCM setup, medical billing operations, clinical AI, and healthcare platform architecture. My Health Aiyin serves 35+ US clients — I bring that operational blueprint to your organisation.</div><div class="svc-tags"><span class="svc-tag">RCM Setup</span><span class="svc-tag">Billing Ops</span><span class="svc-tag">Clinical AI</span><span class="svc-tag">Compliance</span></div><div class="svc-cta">Explore service →</div></div>
+    <div class="tilt-card svc-card rev" onclick="openModal('svc-training')"><span class="svc-icon">🎓</span><div class="svc-name">Training & Capacity Building</div><div class="svc-desc">Product management certifications (SEPM), Agile Scrum Master programs, technology leadership workshops — via PSDF, QCCD Qatar, and 360 Lead Solutions.</div><div class="svc-tags"><span class="svc-tag">School of Excellence in Product Management</span><span class="svc-tag">Agile / ASM</span><span class="svc-tag">PSDF</span><span class="svc-tag">QCCD Qatar</span></div><div class="svc-cta">Explore service →</div></div>
+    <div class="tilt-card svc-card rev" onclick="openModal('svc-offshore')"><span class="svc-icon">🔬</span><div class="svc-name">Offshore Tech Teams (CETEM)</div><div class="svc-desc">Senior Pakistan-based technology talent placed with US and international companies. Sourcing, vetting, onboarding, and performance oversight — all managed end-to-end via CETEM.</div><div class="svc-tags"><span class="svc-tag">Resource Aug</span><span class="svc-tag">Offshore Mgmt</span><span class="svc-tag">Pakistan Tech Talent</span><span class="svc-tag">Agile Delivery</span></div><div class="svc-cta">Explore service →</div></div>
+    <div class="tilt-card svc-card rev" onclick="openModal('svc-investment')"><span class="svc-icon">🪙</span><div class="svc-name">Investment & Qantara Commercials</div><div class="svc-desc">Fractional real estate from PKR 50,000 via Syntiant Atlas. Corporate introductions to Qantara Commercials (RUDA Phase 1) as Overseas Director for ARD City.</div><div class="svc-tags"><span class="svc-tag">RWA Tokenization</span><span class="svc-tag">Fractional RE</span><span class="svc-tag">Qantara</span><span class="svc-tag">RUDA Phase 1</span></div><div class="svc-cta">Explore service →</div></div>
+  </div>
+
+  <!-- Process -->
+  <div class="tc rev" style="padding-top:0;padding-bottom:40px">
+    <span class="eyebrow eyebrow-d">Process</span>
+    <h2 class="th th-w" style="font-size:clamp(28px,3.5vw,42px)">How I work.</h2>
+  </div>
+  <div class="process-row">
+    <div class="proc-step rev"><div class="proc-num">01</div><div class="proc-title">Discovery</div><div class="proc-desc">Deep-dive into your challenge, team, and technical landscape. No assumptions — structured listening and sharp questions.</div></div>
+    <div class="proc-step rev"><div class="proc-num">02</div><div class="proc-title">Strategy</div><div class="proc-desc">A clear technology roadmap with phased delivery, risk flags, team requirements, and measurable outcomes — before any code is written.</div></div>
+    <div class="proc-step rev"><div class="proc-num">03</div><div class="proc-title">Execution</div><div class="proc-desc">Hands-on delivery: architecture decisions, vendor selection, developer oversight, sprint management. Embedded until it ships.</div></div>
+    <div class="proc-step rev"><div class="proc-num">04</div><div class="proc-title">Handover</div><div class="proc-desc">Full documentation, team training, and operational playbooks. Your team owns it. Available for ongoing advisory as needed.</div></div>
+  </div>
+
+  <!-- Engagement Models -->
+  <div class="tc rev" style="padding-top:0;padding-bottom:40px">
+    <span class="eyebrow eyebrow-d">Engagement Models</span>
+    <h2 class="th th-w" style="font-size:clamp(28px,3.5vw,42px)">Choose your model.</h2>
+    <p class="tsub tsub-d">Every engagement is scoped individually. These are starting frameworks — contact me to discuss your specific situation.</p>
+  </div>
+  <div class="engage-grid">
+    <div class="engage-card rev">
+      <div class="engage-tier">Sprint</div>
+      <div class="engage-name">Advisory Sprint</div>
+      <div class="engage-desc">Intensive short-form engagement for a defined challenge — strategy, audit, or product review.</div>
+      <ul class="engage-features"><li>2–4 week engagement</li><li>Technology audit or roadmap</li><li>Executive presentation of findings</li><li>Written recommendations report</li><li>2 follow-up sessions included</li></ul>
+      <button class="engage-btn ghost" onclick="openModal('svc-contact')">Get In Touch →</button>
+    </div>
+    <div class="engage-card featured rev">
+      <div class="engage-tier">Retainer</div>
+      <div class="engage-name">Fractional CTO</div>
+      <div class="engage-desc">Ongoing embedded leadership — I join your leadership team as your part-time technology head.</div>
+      <ul class="engage-features"><li>3–12 month engagement</li><li>Weekly leadership participation</li><li>Full technology strategy ownership</li><li>Team hiring & vendor oversight</li><li>Architecture & delivery decisions</li><li>Investor/board tech presentations</li></ul>
+      <button class="engage-btn" onclick="openModal('svc-contact')">Discuss Engagement →</button>
+    </div>
+    <div class="engage-card rev">
+      <div class="engage-tier">Project</div>
+      <div class="engage-name">Full Build</div>
+      <div class="engage-desc">End-to-end technology delivery — from discovery through launch and handover.</div>
+      <ul class="engage-features"><li>Fixed-scope or time & materials</li><li>Full system architecture</li><li>Developer team assembly & oversight</li><li>QA, deployment & DevOps</li><li>Documentation & team training</li><li>90-day post-launch support</li></ul>
+      <button class="engage-btn ghost" onclick="openModal('svc-contact')">Start Conversation →</button>
+    </div>
+  </div>
+</section>
+
+<hr class="glow-div">
+
+
+
+<!-- VENTURES -->
+<section id="ventures" class="tile">
+  <div class="tc rev">
+    <span class="eyebrow">Portfolio</span>
+    <h2 class="th">Twenty-one ventures.<br><span class="dim">One vision.</span></h2>
+    <p class="tsub">From blockchain PropTech to tactical drones — built, funded, and scaling.</p>
+  </div>
+  <div class="vg perspective-grid">
+    <div class="tilt-card rev" onclick="openModal('aiyin')"><span class="vi">🧬</span><div class="vn">Aiyin Inc.</div><div class="vd">Enterprise Digital Twin solutions, AI IoT systems, and award-nominated 3D VR coaching platforms. Founded 2017.</div><div class="vl">aiyin.us · explore →</div></div>
+    <div class="tilt-card rev" onclick="openModal('myhealth')"><span class="vi">🏥</span><div class="vn">My Health Aiyin</div><div class="vd">US-centric medical billing & RCM firm — 35+ clients, credentialing, AR management with Pakistan-based operations.</div><div class="vl">myhealthaiyin.framer.ai · explore →</div></div>
+    <div class="tilt-card rev" onclick="openModal('caremyhealth')"><span class="vi">🎧</span><div class="vn">Care My Health Aiyin</div><div class="vd">Support BPO arm — patient support, billing queries, and medical admin for US healthcare clients.</div><div class="vl">care.myhealth.aiyin.us · explore →</div></div>
+    <div class="tilt-card rev" onclick="openModal('geartrybe')"><span class="vi">⚙️</span><div class="vn">Gear Trybe</div><div class="vd">US-based premium used engines & transmissions supplier. Quality certified, nationwide shipping. San Jose, CA. +1 (408) 500 1113.</div><div class="vl">geartrybe.aiyin.us · explore →</div></div>
+    <div class="tilt-card rev" onclick="openModal('canis')"><span class="vi">🚁</span><div class="vn">Canis Technology Solutions</div><div class="vd">Pakistan's leading tactical drone company — FPV, reconnaissance, heavy-lift UAVs & counter-drone systems. USA · Australia · Pakistan.</div><div class="vl">canistechsol.vercel.app · explore →</div></div>
+    <div class="tilt-card rev" onclick="openModal('tectrybe')"><span class="vi">🤖</span><div class="vn">Tectrybe Inc.</div><div class="vd">AI software studio — custom AI apps, predictive analytics, intelligent process automation for healthcare, real estate and defence.</div><div class="vl">tectrybe.com · explore →</div></div>
+    <div class="tilt-card rev" onclick="openModal('altertec')"><span class="vi">⚡</span><div class="vn">Altertec.ai</div><div class="vd">Co-founded AI technology platform driving next-generation automation and intelligent systems for enterprise clients.</div><div class="vl">altertec.ai · explore →</div></div>
+    <div class="tilt-card rev" onclick="openModal('cyberx')"><span class="vi">🛡️</span><div class="vn">CyberX Consulting</div><div class="vd">Technology consulting and cybersecurity advisory — enterprise IT strategy, digital governance, and secure systems design.</div><div class="vl">cyberxconsulting.com · explore →</div></div>
+    <div class="tilt-card rev" onclick="openModal('ksa')"><span class="vi">🏨</span><div class="vn">KSA International Corporation</div><div class="vd">Pakistan's largest medical equipment supplier. Chief Technology Consultant. 367 products, 100+ countries — GE · Siemens · Philips.</div><div class="vl">ksainternationalcorporation.com · explore →</div></div>
+    <div class="tilt-card rev" onclick="openModal('axon')"><span class="vi">🌏</span><div class="vn">Axon Global</div><div class="vd">Pakistan's workforce mobility platform — train locally, deploy globally. Japan, UK, USA, Gulf, ANZ, Europe corridors.</div><div class="vl">axon-global-74v0q6a.gamma.site · explore →</div></div>
+    <div class="tilt-card rev" onclick="openModal('360')"><span class="vi">🎓</span><div class="vn">360 Lead Solutions Pvt. Ltd.</div><div class="vd">Official PSDF training partner + QCCD Qatar partnership — professional certifications across Pakistan and the Gulf.</div><div class="vl">360marketingzone.com · explore →</div></div>
+    <div class="tilt-card rev" onclick="openModal('sepm')"><span class="vi">📋</span><div class="vn">School of Excellence in Product Management</div><div class="vd">School of Excellence in Product Management — 12-week globally recognised product management certification program.</div><div class="vl">sepm.alibinnadeem.com · explore →</div></div>
+    <div class="tilt-card rev" onclick="openModal('see')"><span class="vi">🚀</span><div class="vn">SEE — School of Excellence for Entrepreneurs</div><div class="vd">Python, Cybersecurity, AI, Medical Billing, Project Management certifications — bridging talent gaps in high-demand fields.</div><div class="vl">see-entrepreneurs-2kq6dwo.gamma.site · explore →</div></div>
+    <div class="tilt-card rev" onclick="openModal('exp-cetem')"><span class="vi">🔬</span><div class="vn">CETEM</div><div class="vd">Center of Excellence in Technology & Engineering Management — offshore resource augmentation + CETEM Resume platform.</div><div class="vl">cetem.canisrufus.org · explore →</div></div>
+    <div class="tilt-card rev" onclick="openModal('bna')"><span class="vi">🏢</span><div class="vn">Bin Nadeem Associates</div><div class="vd">Family consultancy firm — Islamabad. Business development, construction advisory, and partnership facilitation.</div><div class="vl">binnadeem.com/bnaconsultants · explore →</div></div>
+    <div class="tilt-card rev" onclick="openModal('exp-syntiant')"><span class="vi">🪙</span><div class="vn">Syntiant Atlas</div><div class="vd">CEO & Founder. Pakistan's first blockchain fractional real estate platform — RWA tokenization, RUDA Phase 1. From PKR 50,000.</div><div class="vl">syntiantatlas-web.vercel.app · explore →</div></div>
+    <div class="tilt-card rev" onclick="openModal('mattress')"><span class="vi">🛏️</span><div class="vn">Bin Nadeem Mattress House</div><div class="vd">Authorised Master Moltyform dealer, Golra Road, Islamabad — 10-yr warranty, 60-day trial, AI sleep advisor.</div><div class="vl">binnadeemmattresses.vercel.app · explore →</div></div>
+    <div class="tilt-card rev" onclick="openModal('upvc')"><span class="vi">🏗️</span><div class="vn">UPVC Windows Factory</div><div class="vd">Manufacturing facility in Golra, Rawalpindi — premium UPVC windows and doors for residential and commercial projects.</div><div class="vl">binnadeem.com/upvc · explore →</div></div>
+    <div class="tilt-card rev" onclick="openModal('ledgerly')"><span class="vi">💰</span><div class="vn">Ledgerly Tax Pros</div><div class="vd">US professional tax and accounting services platform — compliance, financial management, and tax preparation for individuals and businesses.</div><div class="vl">ledgerlytaxpros.com · explore →</div></div>
+    <div class="tilt-card rev" onclick="openModal('smilefactory')"><span class="vi">🦷</span><div class="vn">The Smile Factory DBS</div><div class="vd">Dedicated dental billing service — end-to-end RCM, quick claim processing, cloud EHR integration, profit maximisation for dental practices.</div><div class="vl">thesmilefactorydbs.com · explore →</div></div>
+    <div class="tilt-card rev" onclick="openModal('medbilling')"><span class="vi">🏥</span><div class="vn">MedBilling Unified Solutions of America</div><div class="vd">US medical billing and revenue management platform — unified end-to-end billing, claims automation, and analytics for healthcare providers.</div><div class="vl">musamyhealth.com · explore →</div></div>
+    </div>
+</section>
+
+<hr class="glow-div">
+
+<!-- REAL ESTATE -->
+<section id="realestate" class="tile dark">
+  <div class="tc rev">
+    <span class="eyebrow eyebrow-d">Real Estate & Consulting</span>
+    <h2 class="th th-w">Rooted in<br><span class="dim">property.</span></h2>
+    <p class="tsub tsub-d">Technology consulting for Pakistan's premier townships, plus landmark commercial holdings.</p>
+  </div>
+  <div class="reg perspective-grid" style="grid-template-columns:repeat(3,1fr)">
+    <div class="tilt-card rec rev" onclick="openModal('grandcity')"><span class="rei">🏙️</span><div class="ren">Grand City HQ</div><div class="red">Technology Consultant since Feb 2025. Architected GrandX — CRM, ERP, dashboards, utility management. Separate entity from ARD City.</div><div class="rel">grandcity.pk · explore →</div></div>
+    <div class="tilt-card rec rev" onclick="openModal('ardcity')"><span class="rei">🏛️</span><div class="ren">ARD City</div><div class="red">Technology Consultant + Overseas Director Corporate Relations. Separate from Grand City. 431-task digital transformation, 17 domains. Qantara Commercials (RUDA Phase 1).</div><div class="rel">theardcity.com · explore →</div></div>
+    <div class="tilt-card rec rev" onclick="openModal('googletower')"><span class="rei">🗼</span><div class="ren">Google Tower</div><div class="red">Ali's personal office building on Rawalpindi-Islamabad corridor. Houses Aiyin Inc., My Health Aiyin, and Tectrybe. Separate from AirBlue Mall.</div><div class="rel">Google Maps · explore →</div></div>
+    <div class="tilt-card rec rev" onclick="openModal('airblue')"><span class="rei">🏢</span><div class="ren">AirBlue Mall (MetroPole Mall)</div><div class="red">Family partnership stake in AirBlue Mall, Saddar Rawalpindi — formerly MetroPole Mall. Completely separate from Google Tower. Shops, offices, apartments, food court.</div><div class="rel">metropolemall · explore →</div></div>
+    <div class="tilt-card rec rev" onclick="openModal('properties')"><span class="rei">🏠</span><div class="ren">Bin Nadeem Properties</div><div class="red">Full portfolio — Bin Nadeem Tower (Golra Road), UPVC factory, utility management across multiple accounts in the twin cities.</div><div class="rel">binnadeemproperties.vercel.app · explore →</div></div>
+  </div>
+</section>
+
+<hr class="glow-div">
+
+<!-- EXPERIENCE -->
+<section id="experience" class="tile">
+  <div class="tc rev">
+    <span class="eyebrow">Career Timeline</span>
+    <h2 class="th">A decade of<br><span class="dim">global impact.</span></h2>
+    <p class="tsub">Product leadership, technology transformation, and venture building across four continents.</p>
+  </div>
+  <div class="eg">
+    <div class="ei rev" onclick="openModal('exp-ardoverseas')"><div class="edate">Present</div><div class="ebody"><div class="erole">Overseas Director, Corporate Relations</div><div class="eco">ARD City · Qantara Commercials · RUDA Phase 1</div><div class="edesc">International corporate relations and overseas investor facilitation for ARD City. Core product: Qantara Commercials.</div><span class="elink">View details →</span></div></div>
+    
+    <div class="ei rev" onclick="openModal('exp-grandcity')"><div class="edate">Feb 2025 – Present</div><div class="ebody"><div class="erole">Technology Consultant</div><div class="eco">Grand City HQ — Separate from ARD City</div><div class="edesc">Architected GrandX — CRM, ERP, real-time dashboards, utility tracking. Leads Grand City's dedicated IT division.</div><span class="elink">View details →</span></div></div>
+    <div class="ei rev" onclick="openModal('exp-ardcity')"><div class="edate">Feb 2025 – Present</div><div class="ebody"><div class="erole">Technology Consultant</div><div class="eco">ARD City — Separate from Grand City</div><div class="edesc">431-task transformation across 17 domains. Also Overseas Director for Corporate Relations — Qantara Commercials, RUDA Phase 1.</div><span class="elink">View details →</span></div></div>
+    <div class="ei rev" onclick="openModal('exp-cetem')"><div class="edate">Present</div><div class="ebody"><div class="erole">Director, Resource Augmentation</div><div class="eco">CETEM — Center of Excellence in Technology & Engineering Management</div><div class="edesc">Offshore tech talent supply to US companies. End-to-end lifecycle management.</div><span class="elink">View details →</span></div></div>
+    <div class="ei rev" onclick="openModal('exp-psdf')"><div class="edate">Present</div><div class="ebody"><div class="erole">Training Partner</div><div class="eco">PSDF · QCCD Qatar · 360 Lead Solutions</div><div class="edesc">Official PSDF partner + QCCD Qatar partnership — certifications across Pakistan and the Gulf.</div><span class="elink">View details →</span></div></div>
+    <div class="ei rev" onclick="openModal('exp-hope')"><div class="edate">Jul 2023 – Present</div><div class="ebody"><div class="erole">Program Manager</div><div class="eco">Hope AI Inc. — 501(c)(3) Non-Profit</div><div class="edesc">$500K grant. AI-powered learning for incarcerated students. 250+ graduates. 60% program expansion.</div><span class="elink">View details →</span></div></div>
+    <div class="ei rev" onclick="openModal('exp-coforge')"><div class="edate">Jan – Jun 2023</div><div class="ebody"><div class="erole">Senior Technical Product Manager</div><div class="eco">Coforge Inc.</div><div class="edesc">$200M+ geospatial SaaS. 40+ engineers. 65% performance uplift. 20% adoption growth.</div><span class="elink">View details →</span></div></div>
+    <div class="ei rev" onclick="openModal('exp-avanade')"><div class="edate">Jan – Dec 2022</div><div class="ebody"><div class="erole">Product Manager (Consultant)</div><div class="eco">Avanade / Accenture</div><div class="edesc">EchoStar (+42% engagement, $241K follow-on). RBC (−33% onboarding). Microsoft frontline workers.</div><span class="elink">View details →</span></div></div>
+    <div class="ei rev" onclick="openModal('exp-ms')"><div class="edate">Jan 2020 – Dec 2021</div><div class="ebody"><div class="erole">Product Advisor</div><div class="eco">Microsoft</div><div class="edesc">$623K+ ACV. Teams & M365 across EDU/SMB. Strategic accounts in non-profit and education.</div><span class="elink">View details →</span></div></div>
+    <div class="ei rev" onclick="openModal('exp-sleepnum')"><div class="edate">Jan – Dec 2020</div><div class="ebody"><div class="erole">Business Product Associate</div><div class="eco">Sleep Number Inc. — Cupertino, CA</div><div class="edesc">Product development at Silicon Valley headquarters during smart sleep technology expansion.</div><span class="elink">View details →</span></div></div>
+    <div class="ei rev" onclick="openModal('exp-lovesac')"><div class="edate">Nov 2017 – Dec 2019</div><div class="ebody"><div class="erole">Manager</div><div class="eco">Lovesac Inc. — Santa Clara, CA</div><div class="edesc">Retail management and customer experience leadership at premium furniture company, Silicon Valley.</div><span class="elink">View details →</span></div></div>
+    <div class="ei rev" onclick="openModal('exp-aiyin')"><div class="edate">May 2017 – Present</div><div class="ebody"><div class="erole">Founder & CEO</div><div class="eco">Aiyin Inc. · My Health Aiyin · Tectrybe</div><div class="edesc">Built three ventures simultaneously — Digital Twin IoT, US healthcare RCM, AI software studio.</div><span class="elink">View details →</span></div></div>
+    <div class="ei rev" onclick="openModal('exp-canis')"><div class="edate">Sep 2009 – Present</div><div class="ebody"><div class="erole">Co-Founder & Product Manager</div><div class="eco">Canis Technology Solutions (Pvt) Ltd.</div><div class="edesc">Co-founded Pakistan's leading tactical drone company. 15 years. 5 global offices.</div><span class="elink">View details →</span></div></div>
+    <div class="ei rev" onclick="openModal('exp-bna')"><div class="edate">May 2014 – Apr 2017</div><div class="ebody"><div class="erole">Asst. Manager, Communication & Coordination</div><div class="eco">Bin Nadeem Associates (Pvt.) Ltd. — Islamabad</div><div class="edesc">Early career in family enterprise. Foundation for entrepreneurial and consulting career.</div><span class="elink">View details →</span></div></div>
+    <div class="ei rev" onclick="openModal('exp-nsw')"><div class="edate">Nov 2024</div><div class="ebody"><div class="erole">Selected Participant</div><div class="eco">National Security Workshop — National Defence University, Pakistan</div><div class="edesc">Prestigious 5-week program. Security simulations, policy reviews, civil-military-corporate dialogues.</div><span class="elink">View details →</span></div></div>
+  </div>
+</section>
+
+<hr class="glow-div">
+
+<!-- CAPABILITIES -->
+<section id="expertise" class="tile light-sec" style="background:#fff">
+  <div class="tc rev">
+    <span class="eyebrow">Capabilities</span>
+    <h2 class="th">Built for<br><span class="dim">complexity.</span></h2>
+    <p class="tsub" style="color:rgba(0,0,0,.5)">Engineering depth meets product vision meets operational leadership.</p>
+  </div>
+  <div class="xg perspective-grid">
+    <div class="xc tilt-card rev" onclick="openModal('cap-tech')"><span class="xi">🧠</span><div class="xt">Technology Leadership</div><ul class="xl"><li>Digital Transformation Strategy</li><li>Intelligent Systems Architecture</li><li>Enterprise Cloud — Azure, Dynamics, M365</li><li>DevOps · API Integrations · IoT</li></ul><span class="cap-cta">Explore links →</span></div>
+    <div class="xc tilt-card rev" onclick="openModal('cap-product')"><span class="xi">📦</span><div class="xt">Product Excellence</div><ul class="xl"><li>Product Lifecycle & Agile Scaling</li><li>Strategic Roadmapping</li><li>Go-To-Market Strategy</li><li>ML Pipelines & Predictive Analytics</li></ul><span class="cap-cta">Explore links →</span></div>
+    <div class="xc tilt-card rev" onclick="openModal('cap-ops')"><span class="xi">⚙️</span><div class="xt">Operations & Training</div><ul class="xl"><li>Business Process Re-engineering</li><li>CETEM Offshore Augmentation</li><li>PSDF Partnership — Pakistan</li><li>QCCD Qatar — Gulf Training</li></ul><span class="cap-cta">Explore links →</span></div>
+    <div class="xc tilt-card rev" onclick="openModal('cap-defence')"><span class="xi">🚁</span><div class="xt">Defence Technology</div><ul class="xl"><li>Modular Drone System Engineering</li><li>Counter-Drone (C-UAS) Systems</li><li>FPV, Recon & Heavy-Lift UAVs</li><li>War-Gaming Simulation Modules</li></ul><span class="cap-cta">Explore links →</span></div>
+    <div class="xc tilt-card rev" onclick="openModal('cap-health')"><span class="xi">🏥</span><div class="xt">Healthcare IT</div><ul class="xl"><li>Revenue Cycle Management (RCM)</li><li>Medical Billing & Credentialing</li><li>AI Clinical Analytics</li><li>Compliance · AR · Eligibility</li></ul><span class="cap-cta">Explore links →</span></div>
+    <div class="xc tilt-card rev" onclick="openModal('cap-re')"><span class="xi">🏙️</span><div class="xt">Real Estate Tech & PropTech</div><ul class="xl"><li>Overseas Director — ARD City</li><li>Qantara Commercials (RUDA Phase 1)</li><li>Syntiant Atlas CEO — RWA Tokenization</li><li>Smart City ERP/CRM Platforms</li></ul><span class="cap-cta">Explore links →</span></div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="tile">
+  <div class="tc rev">
+    <span class="eyebrow">41 Live Projects</span>
+    <h2 class="th">From concept<br><span class="dim">to deployment.</span></h2>
+    <p class="tsub">Every system live, every URL working. Full-stack enterprise solutions.</p>
+  </div>
+  <div class="pg">
+    <a class="pc rev" href="https://ardcrm.vercel.app" target="_blank"><div class="pcat">CRM & Sales</div><div class="pn">ARD CRM</div><div class="pd">Full CRM — leads, contacts, pipelines, deal tracking across ARD City's sales teams.</div><span class="parr">ardcrm.vercel.app ↗</span></a>
+    <a class="pc rev" href="https://contractorcrm.vercel.app" target="_blank"><div class="pcat">CRM & Sales</div><div class="pn">Contractor CRM</div><div class="pd">California lead intelligence for contractors — trade-specific leads, disaster intel, regional pipelines.</div><span class="parr">contractorcrm.vercel.app ↗</span></a>
+    <a class="pc rev" href="https://geartrybe-crm.netlify.app" target="_blank"><div class="pcat">CRM & Sales</div><div class="pn">Gear Trybe CRM</div><div class="pd">Sales CRM for Gear Trybe — customer interactions, pipelines, lead conversion.</div><span class="parr">geartrybe-crm.netlify.app ↗</span></a>
+    <a class="pc rev" href="https://ard-master-sales.vercel.app" target="_blank"><div class="pcat">CRM & Sales</div><div class="pn">ARD Sales Intelligence</div><div class="pd">Real-time sales command — KPIs, SMART goals, sales plans, exportable reports.</div><span class="parr">ard-master-sales.vercel.app ↗</span></a>
+    <a class="pc rev" href="https://pso-os.vercel.app" target="_blank"><div class="pcat">Admin & Ops</div><div class="pn">PSO OS</div><div class="pd">Personal Staff Officer Operating System — directive governance, multi-tenant RBAC.</div><span class="parr">pso-os.vercel.app ↗</span></a>
+    <a class="pc rev" href="https://ard-command-center.vercel.app" target="_blank"><div class="pcat">Admin & Ops</div><div class="pn">ARD Executive Command Center</div><div class="pd">Chairman, CFO, COO, CSO governance platform with department-level tracking.</div><span class="parr">ard-command-center.vercel.app ↗</span></a>
+    <a class="pc rev" href="https://ruda-eos.vercel.app" target="_blank"><div class="pcat">Admin & Ops</div><div class="pn">RUDA Execution OS</div><div class="pd">ARD war-room sprint tool — 7 domains, live progress, blocking flags, PDF reports.</div><span class="parr">ruda-eos.vercel.app ↗</span></a>
+    <a class="pc rev" href="https://boardsyncs.vercel.app" target="_blank"><div class="pcat">Admin & Ops</div><div class="pn">BoardSync</div><div class="pd">Board meeting management — agendas, action items, decisions, minutes.</div><span class="parr">boardsyncs.vercel.app ↗</span></a>
+    <a class="pc rev" href="https://ard-ams.vercel.app" target="_blank"><div class="pcat">Admin & Ops</div><div class="pn">ARD Asset Management System</div><div class="pd">Centralized asset tracking across all ARD operational departments.</div><span class="parr">ard-ams.vercel.app ↗</span></a>
+    <a class="pc rev" href="https://grandcaseflow.vercel.app" target="_blank"><div class="pcat">Admin & Ops</div><div class="pn">Grand Case Flow</div><div class="pd">Persistent workflow & case management on Next.js + Neon through structured pipelines.</div><span class="parr">grandcaseflow.vercel.app ↗</span></a>
+    <a class="pc rev" href="https://ardcityadmindashboard.vercel.app" target="_blank"><div class="pcat">Construction & RE</div><div class="pn">ARD City Admin Dashboard</div><div class="pd">Central command for ARD City IT operations — infrastructure, admin oversight.</div><span class="parr">ardcityadmindashboard.vercel.app ↗</span></a>
+    <a class="pc rev" href="https://grandcityadmindashboard.vercel.app" target="_blank"><div class="pcat">Construction & RE</div><div class="pn">Grand City Admin Dashboard</div><div class="pd">Comprehensive Grand City admin — users, scheduling, analytics, guest passes.</div><span class="parr">grandcityadmindashboard.vercel.app ↗</span></a>
+    <a class="pc rev" href="https://ardutilitybills.vercel.app" target="_blank"><div class="pcat">Construction & RE</div><div class="pn">ARD Utility Bills</div><div class="pd">Multi-account utility management — electricity, gas, water across all ARD properties.</div><span class="parr">ardutilitybills.vercel.app ↗</span></a>
+    <a class="pc rev" href="https://syntiantatlas-web.vercel.app" target="_blank"><div class="pcat">PropTech · CEO</div><div class="pn">Syntiant Atlas</div><div class="pd">Blockchain fractional real estate & RWA tokenization. RUDA Phase 1. Invest from PKR 50,000.</div><span class="parr">syntiantatlas-web.vercel.app ↗</span></a>
+    <a class="pc rev" href="https://myhealthaiyin.framer.ai" target="_blank"><div class="pcat">Healthcare</div><div class="pn">My Health Aiyin Platform</div><div class="pd">AI-powered health platform — insights, wellness tracking, 35+ US clients.</div><span class="parr">myhealthaiyin.framer.ai ↗</span></a>
+    <a class="pc rev" href="https://canistechsol.vercel.app" target="_blank"><div class="pcat">Defence</div><div class="pn">Canis Technology Solutions</div><div class="pd">Defence solutions, industrial tech, cybersecurity, UAV training. USA · Australia · Pakistan.</div><span class="parr">canistechsol.vercel.app ↗</span></a>
+    <a class="pc rev" href="https://alibinnadeem-ai.github.io/ADS-Buyer_portal/" target="_blank"><div class="pcat">Defence</div><div class="pn">Anti-Drone System Configurator</div><div class="pd">Live 3D ADS portal — CLASS I–V (40–120kg), mesh, span, height with USD/PKR pricing.</div><span class="parr">ADS Buyer Portal ↗</span></a>
+    <a class="pc rev" href="https://gck-dashboard-nine.vercel.app" target="_blank"><div class="pcat">Real Estate</div><div class="pn">GCK Dashboard</div><div class="pd">Grand City Kharian analytics — agent performance, revenue recovery, and client tracking.</div><span class="parr">gck-dashboard-nine.vercel.app ↗</span></a>
+    <a class="pc rev" href="https://activityhub.vercel.app/" target="_blank"><div class="pcat">Team Management</div><div class="pn">ActivityHub Pro</div><div class="pd">Complete team management — activity tracking, scheduling, and collaboration platform.</div><span class="parr">activityhub.vercel.app ↗</span></a>
+    <a class="pc rev" href="https://advance-pm.vercel.app" target="_blank"><div class="pcat">AI Platform</div><div class="pn">Advance AI Project Management</div><div class="pd">AI-powered project management — intelligent task allocation, risk prediction, delivery forecasting.</div><span class="parr">advance-pm.vercel.app ↗</span></a>
+    <a class="pc rev" href="https://www.youtube.com/watch?v=FCCeDuNruUE" target="_blank"><div class="pcat">Media</div><div class="pn">National TV Interview</div><div class="pd">National TV interview — entrepreneurship, technology leadership, AI, and Pakistan's tech ecosystem.</div><span class="parr">YouTube ↗</span></a>
+    <a class="pc rev" href="https://tactical-excellence-in-m-z1g0vwm.gamma.site" target="_blank"><div class="pcat">Defence</div><div class="pn">Tactical Excellence in Military Technology</div><div class="pd">Canis deck — drone ecosystem, $73B to $163B market (14.3% CAGR), AI roadmap, projections.</div><span class="parr">Canis Deck ↗</span></a>
+    <a class="pc rev" href="https://abnportfolio.netlify.app" target="_blank"><div class="pcat">Full Portfolio</div><div class="pn">ABN Tech Portfolio Hub</div><div class="pd">Gateway to all 41 live projects — CRM, admin, construction, health, defence, retail.</div><span class="parr">abnportfolio.netlify.app ↗</span></a>
+  </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section id="publications" class="tile" style="background:var(--d3)">
+  <div class="tc rev">
+    <span class="eyebrow">Research & Publications</span>
+    <h2 class="th">Peer-reviewed.<br><span class="dim">Published.</span></h2>
+    <p class="tsub">Books, journals and conference papers — UAV systems, entrepreneurship, disaster management.</p>
+  </div>
+  <div class="pubg">
+    <a class="pubc rev" href="https://www.amazon.com/Knowledge-Management-Framework-Effective-Disaster/dp/3659950505" target="_blank"><div class="pubt">Knowledge Management Framework for Effective Disaster Management</div><div class="pubp">📚 Book · Lambert Academic Publishing, Germany · 2016</div><div class="pubd">ISBN 978-3-659-95050-6. Disaster transportation, humanitarian response, crowd estimation, shelter planning.</div></a>
+    <a class="pubc rev" href="https://www.amazon.com/Unmanned-Aerial-Vehicle-UAV-Surveillance/dp/3659892688" target="_blank"><div class="pubt">Unmanned Aerial Vehicle (UAV): Surveillance Bird</div><div class="pubp">📚 Book · Lambert Academic Publishing, Germany · 2016</div><div class="pubd">Detailed exploration of UAV deployment for surveillance and emergency management applications.</div></a>
+    <a class="pubc rev" href="https://wmpllc.org/ojs/index.php/jem/article/view/1207" target="_blank"><div class="pubt">Remotely Piloted Life-Saving Effort Vehicles and Emergency Management</div><div class="pubp">📄 Journal · CETEM, Vol 16 No 1 · 2018</div><div class="pubd">RELIEF UAV project by Canis Technology Solutions — UAV-based disaster response in Pakistan.</div></a>
+    <a class="pubc rev" href="http://ajss.abasyn.edu.pk/sparticle?articleID=181" target="_blank"><div class="pubt">Role of Entrepreneurial Orientation Within Small Firms</div><div class="pubp">📄 Journal · Abasyn Journal of Social Sciences · Dec 2016</div><div class="pubd">Entrepreneurial orientation and small firm performance with transformational leadership as mediator.</div></a>
+    <a class="pubc rev" href="https://www.tandfonline.com/doi/full/10.1080/23311975.2016.1245939" target="_blank"><div class="pubt">Critical Assessment of HR Strategies on Employees' Performance</div><div class="pubp">📄 Journal · Cogent Business & Management, Taylor & Francis · Dec 2016</div><div class="pubd">HR strategies and employee engagement in the context of line managers at Sainsbury's.</div></a>
+    <a class="pubc rev" href="https://www.tandfonline.com/doi/full/10.1080/23311975.2016.1189808" target="_blank"><div class="pubt">Impact of Workplace Spirituality on Job Satisfaction: Mediating Effect of Trust</div><div class="pubp">📄 Journal · Cogent Business & Management, Taylor & Francis · Jun 2016</div><div class="pubd">Workplace spirituality–job satisfaction relationship with trust as mediating factor.</div></a>
+    <a class="pubc rev" href="https://garj.org/articles/3273809104072015" target="_blank"><div class="pubt">Culture Shock and Its Effects on Expatriates</div><div class="pubp">📄 Journal · GARJMBS · Jun 2015</div><div class="pubd">Qualitative study on psychological impacts of culture shock on international expatriates.</div></a>
+    <a class="pubc rev" href="https://www.researchgate.net/publication/318034763_Developing_Divergent_Thinking_Skills_in_High_School_Students_by_Enhancing_English_Creative_Writing_Proficiency_Via_Brainstorming_Using_The_CoRT_Thinking_Tools" target="_blank"><div class="pubt">Developing Divergent Thinking Skills in High School Students</div><div class="pubp">🎤 Conference · The Clute Institute, San Francisco · 2016</div><div class="pubd">CoRT thinking tools applied to enhance divergent thinking and creative writing proficiency.</div></a>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education" class="tile light-sec" style="background:#fff">
+  <div class="tc rev">
+    <span class="eyebrow">Education</span>
+    <h2 class="th">Engineering<br><span class="dim">meets business.</span></h2>
+    <p class="tsub" style="color:rgba(0,0,0,.48)">From mechatronics to management — now completing an MBA at SJSU.</p>
+  </div>
+  <div class="eduG">
+    <a class="educ rev" href="https://nust.edu.pk" target="_blank"><div class="edud">BS Mechatronics Engineering</div><div class="edus">NUST — College of E&ME</div><div class="eduy">Class of 2012 · nust.edu.pk ↗</div></a>
+    <a class="educ rev" href="https://www.uettaxila.edu.pk" target="_blank"><div class="edud">MS Engineering Management</div><div class="edus">University of Engineering & Technology, Taxila</div><div class="eduy">Class of 2015 · uettaxila.edu.pk ↗</div></a>
+    <a class="educ rev" href="https://www.sjsu.edu" target="_blank"><div class="edud">MBA — Management & Operations</div><div class="edus">San Jose State University</div><div class="eduy">Expected 2027 · sjsu.edu ↗</div></a>
+  </div>
+  <!-- CERTIFICATIONS inside light section -->
+  <div class="tc rev" style="padding-top:0">
+    <span class="eyebrow">Certifications</span>
+    <h2 class="th" style="font-size:clamp(28px,3.5vw,42px)">Verified.<br><span class="dim">Microsoft-certified.</span></h2>
+  </div>
+  <div class="chips">
+    <a class="chip rev" href="https://www.credly.com/badges/05a9affb-fede-419d-ac48-39b74627b48f" target="_blank">Azure Fundamentals AZ-900 ↗</a>
+    <a class="chip rev" href="https://www.credly.com/badges/e98ca66f-837e-44a7-9110-85a42e02c97e" target="_blank">Power Platform PL-900 ↗</a>
+    <a class="chip rev" href="https://www.credly.com/badges/3c990a3f-ce87-453a-88ee-4be30d1da218" target="_blank">Microsoft 365 MS-900 ↗</a>
+    <a class="chip rev" href="https://www.credly.com/badges/af2f190d-77c4-4bc4-8f41-572168e752b6" target="_blank">Azure AI AI-900 ↗</a>
+    <a class="chip rev" href="https://www.credly.com/badges/fdd9eefe-df80-486b-bf97-8f3daa11ab27" target="_blank">Azure Data DP-900 ↗</a>
+    <a class="chip rev" href="https://www.credly.com/badges/eabc265b-1f57-438a-93a5-e2e2226320f1" target="_blank">Dynamics 365 CRM ↗</a>
+    <a class="chip rev" href="https://www.credly.com/badges/26d62066-f643-472e-bdef-47c89794f22f" target="_blank">Dynamics 365 ERP ↗</a>
+    <a class="chip rev" href="https://www.credly.com/badges/790ad8e8-db73-4257-b0e6-8071f38dc04d" target="_blank">Security & Identity SC-900 ↗</a>
+    <span class="chip rev">Microsoft Innovative Educator (MIE)</span>
+    <span class="chip rev">Agile Scrum Master (ASM)</span>
+    <span class="chip rev">Disaster Risk Reduction — NDMA</span>
+    <span class="chip rev">Product Management 101 — Udemy</span>
+    <span class="chip rev">Global Leadership Certificate — SJSU</span>
+    <span class="chip rev">Technology for Product Managers — LinkedIn</span>
+  </div>
+  <!-- AFFILIATIONS inside light section -->
+  <div class="tc rev" style="padding-top:0">
+    <span class="eyebrow">Board & Alumni</span>
+    <h2 class="th" style="font-size:clamp(28px,3.5vw,42px)">Community.<br><span class="dim">Leadership.</span></h2>
+  </div>
+  <div class="afg" style="padding-bottom:96px">
+    <a class="afc rev" href="https://trust.binnadeem.com" target="_blank"><span class="afi">🏛️</span><div class="afn">Bin Nadeem Trust</div><div class="afr">Board Member · governance & community</div></a>
+    <a class="afc rev" href="https://www.tac.edu.pk" target="_blank"><span class="afi">❤️</span><div class="afn">The HelpCare Society</div><div class="afr">Tech Consultant & Member · tac.edu.pk</div></a>
+    <a class="afc rev" href="https://nustianusa.org" target="_blank"><span class="afi">🌐</span><div class="afn">NUSTIAN USA</div><div class="afr">Program Manager, Industrial Linkages</div></a>
+    <a class="afc rev" href="https://www.sjsu.edu/alumni" target="_blank"><span class="afi">🎓</span><div class="afn">SJSU Alumni</div><div class="afr">San Jose State University Network</div></a>
+    <a class="afc rev" href="https://www.microsoftalumni.com" target="_blank"><span class="afi">💻</span><div class="afn">Microsoft Alumni</div><div class="afr">Innovation & collaboration network</div></a>
+    <a class="afc rev" href="http://beaconhousealumni.org/" target="_blank"><span class="afi">🏫</span><div class="afn">Beaconhouse Alumni</div><div class="afr">Academic excellence network</div></a>
+    <a class="afc rev" href="http://sepm.alibinnadeem.com" target="_blank"><span class="afi">📚</span><div class="afn">School of Excellence in Product Management</div><div class="afr">Founder · School of Excellence in PM</div></a>
+    <a class="afc rev" href="https://issra.pk/national-security-workshop.php" target="_blank"><span class="afi">🛡️</span><div class="afn">NDU NSW</div><div class="afr">Selected Participant · Nov 2024</div></a>
+  
+    <a class="afc rev" href="https://pnbc.co.nz/" target="_blank"><span class="afi">🇳🇿</span><div class="afn">PNBC Member</div><div class="afr">Pakistan New Zealand Business Council · pnbc.co.nz ↗</div></a>
+    <a class="afc rev" href="http://qccd.net" target="_blank"><span class="afi">🎓</span><div class="afn">QCCD Qatar Partner</div><div class="afr">Qatar Center for Career Development · training partnership · qccd.net ↗</div></a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <h2 class="rev">Let's build<br>something<br><span class="grd">extraordinary.</span></h2>
+  <p class="rev">Technology challenge, business opportunity, or a conversation about the future — Ali is ready.</p>
+  <div class="clinks rev">
+    <a class="bp" href="https://www.linkedin.com/in/alibinnadeem/" target="_blank">LinkedIn Profile</a>
+    <a class="bg" href="https://poplme.co/alibinnadeem" target="_blank">Digital Business Card</a>
+    <a class="bg" href="https://alibinnadeem-tn2tlmy.gamma.site" target="_blank">Full Portfolio</a>
+    <a class="bg" href="https://www.researchgate.net/profile/Ali-Bin-Nadeem" target="_blank">ResearchGate</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fi">
+    <div class="fc"><h4>Ventures</h4><ul>
+      <li><a href="https://aiyin.us" target="_blank">Aiyin Inc.</a></li>
+      <li><a href="https://myhealthaiyin.framer.ai" target="_blank">My Health Aiyin</a></li>
+      <li><a href="https://canistechsol.vercel.app" target="_blank">Canis Technology</a></li>
+      <li><a href="http://tectrybe.com" target="_blank">Tectrybe Inc.</a></li>
+      <li><a href="http://altertec.ai" target="_blank">Altertec.ai</a></li>
+      <li><a href="http://360marketingzone.com" target="_blank">360 Lead Solutions</a></li>
+      <li><a href="https://cetem.canisrufus.org" target="_blank">CETEM</a></li>
+      <li><a href="https://syntiantatlas-web.vercel.app" target="_blank">Syntiant Atlas</a></li>
+      <li><a href="https://binnadeemmattresses.vercel.app" target="_blank">Mattress House</a></li>
+      <li><a href="https://binnadeem.com/upvc/" target="_blank">UPVC Factory</a></li>
+    </ul></div>
+    <div class="fc"><h4>Real Estate</h4><ul>
+      <li><a href="https://grandcity.pk" target="_blank">Grand City HQ</a></li>
+      <li><a href="https://theardcity.com" target="_blank">ARD City</a></li>
+      <li><a href="https://syntiantatlas-web.vercel.app" target="_blank">Syntiant Atlas (RWA)</a></li>
+      <li><a href="https://binnadeemproperties.vercel.app" target="_blank">BN Properties</a></li>
+      <li><a href="https://binnadeemutilitybills.vercel.app" target="_blank">Utility Bills</a></li>
+    </ul></div>
+    <div class="fc"><h4>Projects</h4><ul>
+      <li><a href="https://abnportfolio.netlify.app" target="_blank">ABN Portfolio (41)</a></li>
+      <li><a href="https://pso-os.vercel.app" target="_blank">PSO OS</a></li>
+      <li><a href="https://ardcrm.vercel.app" target="_blank">ARD CRM</a></li>
+      <li><a href="https://ard-command-center.vercel.app" target="_blank">Command Center</a></li>
+      <li><a href="https://alibinnadeem-ai.github.io/ADS-Buyer_portal/" target="_blank">ADS Configurator</a></li>
+      <li><a href="https://boardsyncs.vercel.app" target="_blank">BoardSync</a></li>
+      <li><a href="https://grandcaseflow.vercel.app" target="_blank">Grand Case Flow</a></li>
+    </ul></div>
+    <div class="fc"><h4>Research</h4><ul>
+      <li><a href="https://www.researchgate.net/profile/Ali-Bin-Nadeem" target="_blank">ResearchGate</a></li>
+      <li><a href="https://www.amazon.com/Knowledge-Management-Framework-Effective-Disaster/dp/3659950505" target="_blank">Book: Disaster Mgmt</a></li>
+      <li><a href="https://www.amazon.com/Unmanned-Aerial-Vehicle-UAV-Surveillance/dp/3659892688" target="_blank">Book: UAV Surveillance</a></li>
+      <li><a href="https://www.amazon.com/hz/wishlist/ls/3NWDD2K04KL1N" target="_blank">Amazon Wishlist</a></li>
+      <li><a href="https://www.dailymotion.com/video/x32v9ts" target="_blank">Dailymotion Video</a></li>
+    </ul></div>
+    <div class="fc"><h4>Connect</h4><ul>
+      <li><a href="https://www.linkedin.com/in/alibinnadeem/" target="_blank">LinkedIn</a></li>
+      <li><a href="https://poplme.co/alibinnadeem" target="_blank">Popl Digital Card</a></li>
+      <li><a href="https://poplme.co/Myhealthaiyin" target="_blank">My Health Aiyin Card</a></li>
+      <li><a href="https://alibinnadeem-tn2tlmy.gamma.site" target="_blank">Gamma Portfolio</a></li>
+      <li><a href="http://sepm.alibinnadeem.com" target="_blank">School of Excellence in Product Management</a></li>
+      <li><a href="https://hopeai.org" target="_blank">Hope AI Inc.</a></li>
+      <li><a href="http://qccd.net" target="_blank">QCCD Qatar</a></li>
+      <li><a href="https://trust.binnadeem.com" target="_blank">Bin Nadeem Trust</a></li>
+    </ul></div>
+  </div>
+  <div class="fb">
+    <span>© 2025 Ali Bin Nadeem · All rights reserved</span>
+    <span>Rawalpindi · Islamabad · Silicon Valley · Qatar</span>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div id="modal-bg" onclick="if(event.target===this)closeModal()">
+  <div id="modal">
+    <div id="modal-close"><button onclick="closeModal()">✕</button></div>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<script>
+/* ═══════════════════════════════════════
+   CANVAS PARTICLE HERO — v3 exact port
+   3200 pts · r=20-100 · fov=60 · z=60
+   Soft glow only · no hard cores
+═══════════════════════════════════════ */
+(function(){
+  const canvas=document.getElementById('hero-canvas');
+  const ctx=canvas.getContext('2d');
+  function resize(){
+    const h=document.getElementById('hero');
+    canvas.width=h.clientWidth;
+    canvas.height=h.clientHeight;
+    canvas.style.width=h.clientWidth+'px';
+    canvas.style.height=h.clientHeight+'px';
+  }
+  resize();
+  window.addEventListener('resize',resize);
+  const N=3200;
+  const pts=[];
+  for(let i=0;i<N;i++){
+    const r=20+Math.random()*80;
+    const theta=Math.random()*Math.PI*2;
+    const phi=Math.acos(2*Math.random()-1);
+    const t=Math.random();
+    pts.push({
+      sx:r*Math.sin(phi)*Math.cos(theta),
+      sy:r*Math.sin(phi)*Math.sin(theta),
+      sz:r*Math.cos(phi)-30,
+      size:Math.random()*2.5+0.5,
+      rc:Math.round((t<0.5?0.16+t*0.5:0.6)*255),
+      gc:Math.round((t<0.5?0.60+t*0.2:0.8)*255)
+    });
+  }
+  const linePairs=[];
+  for(let i=0;i<60;i++)
+    linePairs.push([Math.floor(Math.random()*N),Math.floor(Math.random()*N)]);
+  let mx=0,my=0,target={x:0,y:0};
+  document.addEventListener('mousemove',e=>{
+    mx=(e.clientX/window.innerWidth-0.5)*2;
+    my=-(e.clientY/window.innerHeight-0.5)*2;
+  });
+  function resize2(){
+    const h=document.getElementById('hero');
+    canvas.width=h.clientWidth;canvas.height=h.clientHeight;
+  }
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate);
+    t+=0.003;
+    target.x+=(mx-target.x)*0.04;
+    target.y+=(my-target.y)*0.04;
+    const rotY=t*0.12+target.x*0.3;
+    const rotX=t*0.05+target.y*0.15;
+    const CW=canvas.width,CH=canvas.height;
+    ctx.clearRect(0,0,CW,CH);
+    const cosY=Math.cos(rotY),sinY=Math.sin(rotY);
+    const cosX=Math.cos(rotX),sinX=Math.sin(rotX);
+    const f=CH/1.1547;
+    const out=[];
+    for(let i=0;i<N;i++){
+      const p=pts[i];
+      const x1=p.sx*cosY+p.sz*sinY;
+      const z1=-p.sx*sinY+p.sz*cosY;
+      const y2=p.sy*cosX-z1*sinX;
+      const z2=p.sy*sinX+z1*cosX;
+      const vz=60-z2;
+      if(vz<1) continue;
+      out.push({px:CW/2+x1*f/vz,py:CH/2-y2*f/vz,vz,p,i});
+    }
+    ctx.strokeStyle='rgba(41,151,255,0.04)';
+    ctx.lineWidth=0.4;
+    for(const[a,b] of linePairs){
+      const pa=out[a],pb=out[b];
+      if(!pa||!pb||pa.vz<8||pb.vz<8) continue;
+      ctx.beginPath();ctx.moveTo(pa.px,pa.py);ctx.lineTo(pb.px,pb.py);ctx.stroke();
+    }
+    out.sort((a,b)=>b.vz-a.vz);
+    for(const{px,py,vz,p} of out){
+      const r=Math.min(p.size*(300/vz)*0.5,7);
+      if(r<0.25) continue;
+      const a=Math.min(0.8,vz<15?vz/15*0.8:0.8);
+      const g=ctx.createRadialGradient(px,py,0,px,py,r);
+      g.addColorStop(0,'rgba('+p.rc+','+p.gc+',255,'+a+')');
+      g.addColorStop(0.4,'rgba('+p.rc+','+p.gc+',255,'+(a*0.55)+')');
+      g.addColorStop(0.75,'rgba('+p.rc+','+p.gc+',255,'+(a*0.12)+')');
+      g.addColorStop(1,'rgba('+p.rc+','+p.gc+',255,0)');
+      ctx.beginPath();ctx.arc(px,py,r,0,Math.PI*2);
+      ctx.fillStyle=g;ctx.fill();
+    }
+  }
+  animate();
+})();
+
+/* ═══════════════════════════════════════
+   CUSTOM CURSOR
+═══════════════════════════════════════ */
+const dot=document.getElementById('cur-dot');
+const ring=document.getElementById('cur-ring');
+let cx=0,cy=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{cx=e.clientX;cy=e.clientY;dot.style.left=cx+'px';dot.style.top=cy+'px';});
+(function animCursor(){
+  rx+=(cx-rx)*0.12;ry+=(cy-ry)*0.12;
+  ring.style.left=rx+'px';ring.style.top=ry+'px';
+  requestAnimationFrame(animCursor);
+})();
+document.querySelectorAll('a,button,.tilt-card,.xc,.rec,.ei,.pc,.pubc,.educ,.afc,.chip').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ring.style.width='56px';ring.style.height='56px';ring.style.borderColor='rgba(41,151,255,.9)';dot.style.background=getComputedStyle(document.documentElement).getPropertyValue('--sky')});
+  el.addEventListener('mouseleave',()=>{ring.style.width='36px';ring.style.height='36px';ring.style.borderColor='rgba(41,151,255,.6)';dot.style.background='#fff'});
+});
+
+/* ═══════════════════════════════════════
+   3D TILT CARDS
+═══════════════════════════════════════ */
+document.querySelectorAll('.tilt-card').forEach(card=>{
+  card.addEventListener('mousemove',e=>{
+    const r=card.getBoundingClientRect();
+    const x=(e.clientX-r.left)/r.width;
+    const y=(e.clientY-r.top)/r.height;
+    const rx_=-(y-0.5)*14;
+    const ry_=(x-0.5)*14;
+    card.style.transform=`perspective(800px) rotateX(${rx_}deg) rotateY(${ry_}deg) translateZ(8px) scale(1.02)`;
+    card.style.setProperty('--mx',`${x*100}%`);
+    card.style.setProperty('--my',`${y*100}%`);
+  });
+  card.addEventListener('mouseleave',()=>{
+    card.style.transform='perspective(800px) rotateX(0deg) rotateY(0deg) translateZ(0) scale(1)';
+  });
+});
+
+/* ═══════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════ */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const siblings=[...e.target.parentElement.querySelectorAll('.rev')];
+      const idx=siblings.indexOf(e.target);
+      setTimeout(()=>e.target.classList.add('vis'),idx*30);
+      obs.unobserve(e.target);
+    }
+  });
+},{threshold:0.05,rootMargin:'0px 0px -10px 0px'});
+document.querySelectorAll('.rev').forEach(el=>obs.observe(el));
+
+/* ═══════════════════════════════════════
+   PARALLAX SECTIONS
+═══════════════════════════════════════ */
+window.addEventListener('scroll',()=>{
+  const y=window.scrollY;
+  const heroInner=document.querySelector('.hero-inner');
+  if(heroInner)heroInner.style.transform=`translateY(${y*0.28}px)`;
+});
+
+/* ═══════════════════════════════════════
+   MODAL DATA
+═══════════════════════════════════════ */
+const modals={
+  aiyin:{ey:'Venture · Founded 2017',h:'Aiyin Inc.',sub:'Enterprise Digital Twin & AI Platform',
+    body:`<div class="mb-sec"><h4>Overview</h4><p>Aiyin Inc. builds enterprise-grade Digital Twin solutions integrating IoT sensors for real-time predictive maintenance, safety forecasting, and manufacturing optimization. Also developed an award-nominated 3D Virtual Reality corporate coaching platform with global recognition and seed-stage investment.</p></div>
+    <div class="mb-sec"><h4>Key Achievements</h4><div class="mb-stat"><div class="mb-stat-i"><div class="n">32%</div><div class="l">Downtime Reduction</div></div><div class="mb-stat-i"><div class="n">26%</div><div class="l">Safety Improvement</div></div><div class="mb-stat-i"><div class="n">VR</div><div class="l">Award-Nominated</div></div></div></div>
+    <div class="mb-sec"><h4>Focus Areas</h4><ul><li>Enterprise Digital Twin with IoT sensor integration</li><li>Predictive maintenance and safety forecasting</li><li>3D VR corporate coaching and education</li><li>Manufacturing process optimization</li><li>Offshore talent via CETEM</li></ul></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://aiyin.us" target="_blank">aiyin.us ↗</a><a class="mb-link mb-link-ghost" href="https://poplme.co/Myhealthaiyin" target="_blank">Popl Card ↗</a></div>`},
+  myhealth:{ey:'Venture · Medical Billing',h:'My Health Aiyin',sub:'US Healthcare Revenue Cycle Management',
+    body:`<div class="mb-sec"><h4>Overview</h4><p>Founded and scaled a US-centric medical billing and RCM firm with distributed teams in Pakistan. Technology-driven optimization across credentialing, AR management, and compliance for healthcare providers.</p></div>
+    <div class="mb-sec"><h4>Services</h4><ul><li>Medical Billing & Claims Processing</li><li>Revenue Cycle Management (end-to-end)</li><li>Credentialing — every step managed</li><li>Accounts Receivable (AR) Management</li><li>Eligibility Verification</li><li>Electronic Claims — 40–50% cost reduction</li></ul></div>
+    <div class="mb-sec"><h4>Stats</h4><div class="mb-stat"><div class="mb-stat-i"><div class="n">35+</div><div class="l">US Clients</div></div><div class="mb-stat-i"><div class="n">40%</div><div class="l">Claims Cost ↓</div></div><div class="mb-stat-i"><div class="n">USA</div><div class="l">Market Focus</div></div></div></div>
+    <div class="mb-sec"><h4>Team</h4><ul><li>Ali Nadeem — Co-founder & CEO</li><li>Zuha Mehboob Sheikh — Director Outreach</li><li>Ali Imran Fazal — Commercial Director</li><li>Muhammad Bin Shahzad — Director Operations</li><li>Kashif Iqbal — Chief Business Officer</li></ul></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://myhealthaiyin.framer.ai" target="_blank">myhealthaiyin.framer.ai ↗</a><a class="mb-link mb-link-ghost" href="https://poplme.co/Myhealthaiyin" target="_blank">Business Card ↗</a><a class="mb-link mb-link-ghost" href="https://showcasemyhealth.framer.ai" target="_blank">Showcase ↗</a></div>`},
+  canis:{ey:"Venture · Co-Founded 2009",h:"Canis Technology Solutions",sub:"Pakistan's Leading Tactical Drone Manufacturer",
+    body:`<div class="mb-sec"><h4>Overview</h4><p>Co-founded in 2009. Pakistan's leading tactical drone manufacturer delivering modular, AI-driven UAV solutions for defense, industrial inspections, emergency response, and disaster management. 5 offices worldwide.</p></div>
+    <div class="mb-sec"><h4>Capabilities</h4><ul><li>FPV Drones, Reconnaissance UAVs, Heavy-Lift Platforms</li><li>War-Gaming Simulation Modules</li><li>Counter-Drone (ADS) procurement & development</li><li>Border control & surveillance systems</li><li>Cybersecurity programs & advisory</li><li>Training & certification tracks</li></ul></div>
+    <div class="mb-sec"><h4>ADS Certifications</h4><div class="mb-chips"><span class="mb-chip">ISO 2408 Steel Wire Rope</span><span class="mb-chip">ASTM A500-B Structural</span><span class="mb-chip">NATO STANAG 4671</span><span class="mb-chip">ETAG 027 Flexible Barrier</span></div></div>
+    <div class="mb-sec"><h4>Offices</h4><ul><li>Naperville, IL USA · (+1) 517-303-5886</li><li>Sydney, Australia · 3/28 Macquarie Road, Ingleburn</li><li>Melbourne, Australia · 24 Moore Park Drive</li><li>Adelaide, Australia · 2 Derrilin Road, Ingle Farm</li><li>Rawalpindi, Pakistan · Race Course Road, Westridge · +92-51-8433550</li></ul></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://canistechsol.vercel.app" target="_blank">canistechsol.vercel.app ↗</a><a class="mb-link mb-link-ghost" href="https://alibinnadeem-ai.github.io/ADS-Buyer_portal/" target="_blank">ADS Configurator ↗</a><a class="mb-link mb-link-ghost" href="https://canistechsol.vercel.app/products" target="_blank">Products ↗</a><a class="mb-link mb-link-ghost" href="https://canistechsol.vercel.app/trainings" target="_blank">Trainings ↗</a></div>`},
+  tectrybe:{ey:"Venture · AI Software Studio",h:"Tectrybe Inc.",sub:"Custom AI Applications & Predictive Analytics",
+    body:`<div class="mb-sec"><h4>Overview</h4><p>AI software development company based in Google Tower, Rawalpindi — specializing in custom AI-powered applications, predictive analytics, and intelligent process automation across three verticals.</p></div>
+    <div class="mb-sec"><h4>Verticals</h4><ul><li>Healthcare AI — medical diagnostics and patient care optimization</li><li>Real Estate Tech — predictive analytics for property management</li><li>Defense Solutions — intelligent automation for security applications</li></ul></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="http://tectrybe.com" target="_blank">tectrybe.com ↗</a></div>`},
+  altertec:{ey:"Venture · Co-Founder",h:"Altertec.ai",sub:"Next-Generation AI Automation Platform",
+    body:`<div class="mb-sec"><h4>Overview</h4><p>Co-founded AI platform driving next-generation automation and intelligent systems for enterprise clients. Ali brings product leadership and AI systems architecture expertise.</p></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="http://altertec.ai" target="_blank">altertec.ai ↗</a></div>`},
+  360:{ey:"Venture · Training",h:"360 Lead Solutions Pvt. Ltd.",sub:"PSDF · QCCD Qatar · Nationwide Skills Development",
+    body:`<div class="mb-sec"><h4>Overview</h4><p>Official training partner with Punjab Skills Development Fund (PSDF) and Qatar Center for Career Development (QCCD) — delivering subsidized professional certifications and leadership programs across Pakistan and the Gulf.</p></div>
+    <div class="mb-sec"><h4>Programs</h4><ul><li>Product Management certifications (SEPM)</li><li>Agile Scrum Master training</li><li>Technology for managers</li><li>Leadership development workshops</li><li>QCCD Gulf market delivery</li></ul></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="http://360marketingzone.com" target="_blank">360marketingzone.com ↗</a><a class="mb-link mb-link-ghost" href="http://qccd.net" target="_blank">QCCD Qatar ↗</a><a class="mb-link mb-link-ghost" href="http://sepm.alibinnadeem.com" target="_blank">SEPM ↗</a><a class="mb-link mb-link-ghost" href="https://alibinnadeem.notion.site/alibinnadeem/School-of-Excellence-in-Product-Management-SEPM-5c91ee379d8848cea58ad4dde64bb345" target="_blank">SEPM Notion ↗</a></div>`},
+  mattress:{ey:"Retail · Islamabad",h:"Bin Nadeem Mattress House",sub:"Authorised Master Moltyform Dealer · Golra Road",
+    body:`<div class="mb-sec"><h4>Overview</h4><p>Official Master Moltyform dealer on Golra Road (next to Audi building), Islamabad. Contact: +92 300 8540914</p></div>
+    <div class="mb-sec"><h4>Products</h4><ul><li>Master Comfort Pro — medium, memory foam, side sleepers</li><li>Master Support Plus — firm, high-density, back & stomach sleepers</li><li>Master Hybrid Elite — medium-firm, hybrid, all positions & couples</li></ul></div>
+    <div class="mb-sec"><h4>Guarantees</h4><div class="mb-stat"><div class="mb-stat-i"><div class="n">10yr</div><div class="l">Warranty</div></div><div class="mb-stat-i"><div class="n">60d</div><div class="l">Trial</div></div><div class="mb-stat-i"><div class="n">Free</div><div class="l">Delivery</div></div></div></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://binnadeemmattresses.vercel.app" target="_blank">Full Website ↗</a><a class="mb-link mb-link-ghost" href="https://binnadeemmattresses.vercel.app/mattress-finder" target="_blank">Sleep Quiz ↗</a><a class="mb-link mb-link-ghost" href="https://binnadeemmattresses.vercel.app/shop" target="_blank">Shop ↗</a><a class="mb-link mb-link-ghost" href="https://binnadeemmattresses.vercel.app/warranty" target="_blank">Warranty ↗</a></div>`},
+  upvc:{ey:"Manufacturing · Golra, Rawalpindi",h:"UPVC Windows Factory",sub:"Premium Windows & Doors Manufacturing",
+    body:`<div class="mb-sec"><h4>Overview</h4><p>UPVC windows manufacturing facility in Golra, Rawalpindi producing premium windows and doors for residential and commercial construction projects across the twin cities.</p></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://binnadeem.com/upvc/" target="_blank">binnadeem.com/upvc ↗</a><a class="mb-link mb-link-ghost" href="https://binnadeem.com/bnaconsultants/" target="_blank">BNA Consultants ↗</a></div>`},
+  grandcity:{ey:"Consulting · Feb 2025 – Present",h:"Grand City HQ",sub:"Technology Consultant — GrandX Ecosystem",
+    body:`<div class="mb-sec"><h4>Role</h4><p>Technology Consultant at Grand City HQ — architected GrandX, a comprehensive digital ecosystem integrating CRM, ERP, and real-time data visualizations across real-estate management and customer success.</p></div>
+    <div class="mb-sec"><h4>Platforms Delivered</h4><ul><li>Grand City Admin Dashboard — users, scheduling, analytics, guest passes</li><li>Grand Customer Funnel — acquisition and sales management</li><li>Grand Case Flow — Next.js + Neon persistent case management</li><li>Grand City Utility Bills — billing & consumption tracking</li><li>GrandX Admin — API management system</li></ul></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://grandcity.pk" target="_blank">grandcity.pk ↗</a><a class="mb-link mb-link-ghost" href="https://grandcityadmindashboard.vercel.app" target="_blank">Admin Dashboard ↗</a><a class="mb-link mb-link-ghost" href="https://grandcaseflow.vercel.app" target="_blank">Case Flow ↗</a><a class="mb-link mb-link-ghost" href="https://grandcustomerfunnel.vercel.app" target="_blank">Customer Funnel ↗</a></div>`},
+  ardcity:{ey:"Consulting · Technology",h:"ARD City",sub:"Technology Consultant + Overseas Director · RUDA Phase 1",
+    body:`<div class="mb-sec"><h4>Dual Role</h4><p>Technology Consultant delivering 431-task digital transformation across 17 domains, and Overseas Director for Corporate Relations driving international investment into ARD City's flagship Qantara Commercials development in RUDA Phase 1.</p></div>
+    <div class="mb-sec"><h4>Core Product: Qantara Commercials</h4><p>Premium mixed-use commercial development within RUDA Phase 1 — targeting corporate investors, franchise operators, and HNWIs for the twin cities corridor.</p></div>
+    <div class="mb-sec"><h4>Platforms</h4><ul><li>ARD CRM · ARD Executive Command Center · RUDA EOS</li><li>ARD AMS · ARD Utility Bills · SiteTab</li></ul></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://theardcity.com" target="_blank">theardcity.com ↗</a><a class="mb-link mb-link-ghost" href="https://ardcrm.vercel.app" target="_blank">ARD CRM ↗</a><a class="mb-link mb-link-ghost" href="https://ard-command-center.vercel.app" target="_blank">Command Center ↗</a><a class="mb-link mb-link-ghost" href="https://ruda-eos.vercel.app" target="_blank">RUDA EOS ↗</a></div>`},
+  airblue:{ey:"Real Estate · Family Ownership",h:"AirBlue Mall (Google Tower)",sub:"Commercial Landmark · Saddar, Rawalpindi",
+    body:`<div class="mb-sec"><h4>Overview</h4><p>Family partnership stake in AirBlue Mall (formerly MetroPole Mall), Saddar, Rawalpindi. The building — known as Google Tower — houses three of Ali's tech companies.</p></div>
+    <div class="mb-sec"><h4>Resident Companies</h4><ul><li>Gear Trybe — sales CRM & business platform</li><li>My Health Aiyin — US medical billing operations</li><li>Tectrybe Inc. — AI software development studio</li></ul></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link mb-link-ghost" href="https://geartrybe-crm.netlify.app" target="_blank">Gear Trybe CRM ↗</a><a class="mb-link mb-link-ghost" href="https://myhealthaiyin.framer.ai" target="_blank">My Health Aiyin ↗</a><a class="mb-link mb-link-ghost" href="http://tectrybe.com" target="_blank">Tectrybe ↗</a></div>`},
+  properties:{ey:"Real Estate",h:"Bin Nadeem Properties",sub:"Portfolio Management — Twin Cities",
+    body:`<div class="mb-sec"><h4>Portfolio</h4><ul><li>Bin Nadeem Tower — Golra Moor Road, Islamabad (Mattress House + UPVC factory)</li><li>AirBlue Mall / Google Tower — Saddar, Rawalpindi (3 resident tech companies)</li><li>Utility management across multiple accounts</li></ul></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://binnadeemproperties.vercel.app" target="_blank">Properties Platform ↗</a><a class="mb-link mb-link-ghost" href="https://binnadeemutilitybills.vercel.app" target="_blank">Utility Bills ↗</a><a class="mb-link mb-link-ghost" href="https://binnadeem.com/bnaconsultants/" target="_blank">BNA Consultants ↗</a></div>`},
+  'exp-ardoverseas':{ey:"Present",h:"Overseas Director, Corporate Relations",sub:"ARD City · Qantara Commercials · RUDA Phase 1",
+    body:`<div class="mb-sec"><h4>Role</h4><p>Represents ARD City to international investors, overseas Pakistanis, and corporate partners. Core product: Qantara Commercials — premium mixed-use commercial units in RUDA Phase 1.</p></div>
+    <div class="mb-sec"><h4>Responsibilities</h4><ul><li>International corporate relations and investor outreach</li><li>Overseas Pakistani investment facilitation</li><li>Qantara Commercials positioning (RUDA Phase 1)</li><li>Executive-level institutional partnerships</li></ul></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://theardcity.com" target="_blank">theardcity.com ↗</a><a class="mb-link mb-link-ghost" href="https://ard-command-center.vercel.app" target="_blank">Command Center ↗</a><a class="mb-link mb-link-ghost" href="https://ardcrm.vercel.app" target="_blank">ARD CRM ↗</a></div>`},
+  'exp-syntiant':{ey:"Present · CEO & Founder",h:"Syntiant Atlas — CEO",sub:"RWA Tokenization · RUDA Phase 1",
+    body:`<div class="mb-sec"><h4>Overview</h4><p>Pakistan's first blockchain fractional real estate investment platform. Tokenizes Real-World Assets (RWA) — start investing from PKR 50,000 with smart contract security and token-weighted governance.</p></div>
+    <div class="mb-sec"><h4>Features</h4><ul><li>Fractional ownership via tokenized shares</li><li>Smart contract security on blockchain</li><li>Token-weighted voting governance</li><li>RUDA Phase 1 as primary investment targets</li></ul></div>
+    <div class="mb-sec"><h4>Stats</h4><div class="mb-stat"><div class="mb-stat-i"><div class="n">PKR 50K</div><div class="l">Min. Investment</div></div><div class="mb-stat-i"><div class="n">RWA</div><div class="l">Tokenization</div></div><div class="mb-stat-i"><div class="n">RUDA</div><div class="l">Phase 1 Focus</div></div></div></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://syntiantatlas-web.vercel.app" target="_blank">syntiantatlas-web.vercel.app ↗</a><a class="mb-link mb-link-ghost" href="https://syntiantatlas-web.vercel.app/about-us" target="_blank">About ↗</a><a class="mb-link mb-link-ghost" href="https://syntiantatlas-web.vercel.app/register" target="_blank">Start Investing ↗</a><a class="mb-link mb-link-ghost" href="https://syntiantatlas-web.vercel.app/faq" target="_blank">FAQ ↗</a></div>`},
+  'exp-cetem':{ey:"Present",h:"CETEM",sub:"Center of Excellence in Technology & Engineering Management",
+    body:`<div class="mb-sec"><h4>Overview</h4><p>Offshore talent and resource augmentation arm — supplying senior technology resources to US-based companies through agile delivery models. Bridges Pakistani engineering talent with global enterprise demand.</p></div>
+    <div class="mb-sec"><h4>Services</h4><ul><li>Senior tech resource placement for US clients</li><li>Agile offshore delivery management</li><li>End-to-end talent lifecycle: vetting, onboarding, performance</li><li>Research publishing (RELIEF UAV Journal, 2018)</li></ul></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://cetem.canisrufus.org" target="_blank">cetem.canisrufus.org ↗</a><a class="mb-link mb-link-ghost" href="https://wmpllc.org/ojs/index.php/jem/article/view/1207" target="_blank">CETEM Journal ↗</a></div>`},
+  'exp-psdf':{ey:"Present",h:"PSDF · QCCD · 360 Lead Solutions",sub:"Punjab Skills Development Fund · Qatar Career Development",
+    body:`<div class="mb-sec"><h4>PSDF — Pakistan</h4><p>Official PSDF training partner delivering subsidized professional and technology programs through 360 Lead Solutions across Punjab.</p></div>
+    <div class="mb-sec"><h4>QCCD — Qatar</h4><p>Partnership with Qatar Center for Career Development (qccd.net) — delivering leadership and tech certifications to the Gulf market and Pakistani diaspora.</p></div>
+    <div class="mb-sec"><h4>Programs</h4><ul><li>SEPM — Product Management certifications</li><li>Agile Scrum Master training</li><li>Leadership development workshops</li><li>Digital transformation awareness</li></ul></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="http://360marketingzone.com" target="_blank">360 Lead Solutions ↗</a><a class="mb-link mb-link-ghost" href="http://qccd.net" target="_blank">QCCD Qatar ↗</a><a class="mb-link mb-link-ghost" href="http://sepm.alibinnadeem.com" target="_blank">SEPM ↗</a><a class="mb-link mb-link-ghost" href="https://cetem.canisrufus.org" target="_blank">CETEM ↗</a></div>`},
+  'exp-grand':{ey:"Feb 2025 – Present",h:"Technology Consultant",sub:"Grand City HQ · ARD City",
+    body:`<div class="mb-sec"><h4>Impact</h4><p>Dual engagement across Grand City and ARD City — architecting GrandX digital ecosystem and 431-task transformation across 17 ARD operational domains.</p></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://grandcity.pk" target="_blank">grandcity.pk ↗</a><a class="mb-link mb-link-ghost" href="https://theardcity.com" target="_blank">theardcity.com ↗</a></div>`},
+  'exp-hope':{ey:"Jul 2023 – Present",h:"Program Manager",sub:"Hope AI Inc. · 501(c)(3)",
+    body:`<div class="mb-sec"><h4>Role</h4><p>End-to-end architecture of AI-powered hybrid learning for incarcerated students — real-time performance tracking, industry certification pathways.</p></div>
+    <div class="mb-sec"><h4>Impact</h4><div class="mb-stat"><div class="mb-stat-i"><div class="n">60%</div><div class="l">Expansion</div></div><div class="mb-stat-i"><div class="n">$500K</div><div class="l">Grant Funding</div></div><div class="mb-stat-i"><div class="n">250+</div><div class="l">Graduates</div></div></div></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://hopeai.org" target="_blank">hopeai.org ↗</a></div>`},
+  'exp-coforge':{ey:"Jan – Jun 2023",h:"Senior Technical Product Manager",sub:"Coforge Inc.",
+    body:`<div class="mb-sec"><h4>Role</h4><p>Led $200M+ geospatial SaaS — 40+ cross-border engineers, SWMZ/FME/Postgres/Tile Server stack.</p></div>
+    <div class="mb-sec"><h4>Impact</h4><div class="mb-stat"><div class="mb-stat-i"><div class="n">65%</div><div class="l">Performance ↑</div></div><div class="mb-stat-i"><div class="n">20%</div><div class="l">Adoption ↑</div></div><div class="mb-stat-i"><div class="n">40+</div><div class="l">Engineers</div></div></div></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://www.coforge.com" target="_blank">coforge.com ↗</a></div>`},
+  'exp-avanade':{ey:"Jan – Dec 2022",h:"Product Manager (Consultant)",sub:"Avanade / Accenture",
+    body:`<div class="mb-sec"><h4>Projects</h4><ul><li><strong>EchoStar</strong> — SharePoint & Viva Connections · +42% engagement · $241K follow-on</li><li><strong>Microsoft Frontline Workers</strong> — roadmap alignment with sustainability goals</li><li><strong>RBC Business Banking</strong> — −33% onboarding · 100% developer retention</li></ul></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://www.avanade.com" target="_blank">avanade.com ↗</a><a class="mb-link mb-link-ghost" href="https://www.rbcroyalbank.com" target="_blank">RBC ↗</a><a class="mb-link mb-link-ghost" href="https://www.echostar.com" target="_blank">EchoStar ↗</a></div>`},
+  'exp-ms':{ey:"Jan 2020 – Dec 2021",h:"Product Advisor",sub:"Microsoft",
+    body:`<div class="mb-sec"><h4>Role</h4><p>Strategic accounts exceeding $623K ACV. Teams & M365 across EDU/SMB. Non-profit and education market penetration.</p></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://microsoft.com" target="_blank">microsoft.com ↗</a><a class="mb-link mb-link-ghost" href="https://www.microsoftalumni.com" target="_blank">MS Alumni ↗</a></div>`},
+  'exp-sleepnum':{ey:"Jan – Dec 2020",h:"Business Product Associate",sub:"Sleep Number Inc. · Cupertino, CA",
+    body:`<div class="mb-sec"><h4>Role</h4><p>Product development at Silicon Valley headquarters during smart sleep technology expansion.</p></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://www.sleepnumber.com" target="_blank">sleepnumber.com ↗</a></div>`},
+  'exp-lovesac':{ey:"Nov 2017 – Dec 2019",h:"Manager",sub:"Lovesac Inc. · Santa Clara, CA",
+    body:`<div class="mb-sec"><h4>Role</h4><p>Retail management and customer experience leadership in Silicon Valley.</p></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://www.lovesac.com" target="_blank">lovesac.com ↗</a></div>`},
+  'exp-aiyin':{ey:"May 2017 – Present",h:"Founder & CEO",sub:"Aiyin Inc. · My Health Aiyin · Tectrybe",
+    body:`<div class="mb-sec"><h4>Overview</h4><p>Built three simultaneous ventures — Digital Twin IoT, US healthcare RCM, AI software studio. All headquartered in Google Tower, Rawalpindi.</p></div>
+    <div class="mb-sec"><h4>Stats</h4><div class="mb-stat"><div class="mb-stat-i"><div class="n">32%</div><div class="l">Downtime ↓</div></div><div class="mb-stat-i"><div class="n">35+</div><div class="l">Healthcare Clients</div></div><div class="mb-stat-i"><div class="n">3</div><div class="l">Companies Built</div></div></div></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://aiyin.us" target="_blank">aiyin.us ↗</a><a class="mb-link mb-link-ghost" href="https://myhealthaiyin.framer.ai" target="_blank">My Health Aiyin ↗</a><a class="mb-link mb-link-ghost" href="http://tectrybe.com" target="_blank">Tectrybe ↗</a></div>`},
+  'exp-canis':{ey:"Sep 2009 – Present",h:"Co-Founder & Product Manager",sub:"Canis Technology Solutions (Pvt) Ltd.",
+    body:`<div class="mb-sec"><h4>Overview</h4><p>15 years building Pakistan's leading tactical drone company. 5 global offices. FPV, recon, heavy-lift UAVs and CLASS I–V anti-drone systems.</p></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://canistechsol.vercel.app" target="_blank">canistechsol.vercel.app ↗</a><a class="mb-link mb-link-ghost" href="https://alibinnadeem-ai.github.io/ADS-Buyer_portal/" target="_blank">ADS Configurator ↗</a><a class="mb-link mb-link-ghost" href="https://wmpllc.org/ojs/index.php/jem/article/view/1207" target="_blank">RELIEF UAV Paper ↗</a></div>`},
+  'exp-bna':{ey:"May 2014 – Apr 2017",h:"Asst. Manager, Communication",sub:"Bin Nadeem Associates (Pvt.) Ltd. · Islamabad",
+    body:`<div class="mb-sec"><h4>Role</h4><p>Early career in family enterprise — communication, coordination, and business operations. Foundation for entrepreneurial career.</p></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://binnadeem.com/bnaconsultants/" target="_blank">BNA Consultants ↗</a></div>`},
+  'exp-nsw':{ey:"Nov 2024",h:"National Security Workshop",sub:"National Defence University, Pakistan",
+    body:`<div class="mb-sec"><h4>Overview</h4><p>Selected participant in the NSW — prestigious 5-week program at NDU Pakistan. National security simulations, policy reviews, civil-military-corporate dialogues shaping Pakistan's security agenda.</p></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://issra.pk/national-security-workshop.php" target="_blank">NSW Programme ↗</a></div>`},
+  'cap-tech':{ey:"Capability",h:"Technology Leadership",sub:"Digital Transformation · AI Systems · Enterprise Cloud",
+    body:`<div class="mb-sec"><h4>Overview</h4><p>Led full digital transformations across real estate, healthcare, defence, and SaaS — from zero to production for multiple organizations simultaneously.</p></div>
+    <div class="mb-sec"><h4>Disciplines</h4><ul><li>Technology Consulting & Digital Transformation</li><li>Intelligent Systems Architecture & AI Solutions</li><li>Enterprise Cloud: Azure, Dynamics 365, M365</li><li>DevOps, API Integrations, IoT Sensor Networks</li><li>Digital Twin System Development</li></ul></div>
+    <div class="mb-sec"><h4>Key Engagements</h4><ul><li>Microsoft — $623K ACV, Teams & M365</li><li>Avanade/Accenture — EchoStar, RBC, Frontline Workers</li><li>Coforge — $200M+ Geospatial SaaS, 40+ engineers</li><li>Grand City / ARD City — GrandX, 17 domains</li></ul></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://www.linkedin.com/in/alibinnadeem/" target="_blank">LinkedIn ↗</a><a class="mb-link mb-link-ghost" href="https://alibinnadeem-tn2tlmy.gamma.site" target="_blank">Full Portfolio ↗</a><a class="mb-link mb-link-ghost" href="http://altertec.ai" target="_blank">Altertec.ai ↗</a></div>`},
+  'cap-product':{ey:"Capability",h:"Product Excellence",sub:"Lifecycle · Roadmapping · Go-To-Market",
+    body:`<div class="mb-sec"><h4>Overview</h4><p>Certified Agile Scrum Master with a track record shipping enterprise products — from geospatial SaaS and Microsoft platforms to medical billing and blockchain real estate investment.</p></div>
+    <div class="mb-sec"><h4>Certifications</h4><ul><li>School of Excellence in Product Management (Founder)</li><li>Agile Scrum Master (ASM)</li><li>Product Management 101 — Udemy</li><li>Global Leadership Certificate — SJSU</li></ul></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="http://sepm.alibinnadeem.com" target="_blank">SEPM ↗</a><a class="mb-link mb-link-ghost" href="https://alibinnadeem.notion.site/alibinnadeem/School-of-Excellence-in-Product-Management-SEPM-5c91ee379d8848cea58ad4dde64bb345" target="_blank">SEPM Notion ↗</a><a class="mb-link mb-link-ghost" href="https://abnportfolio.netlify.app" target="_blank">41 Live Projects ↗</a></div>`},
+  'cap-ops':{ey:"Capability",h:"Operations & Training",sub:"CETEM · PSDF · QCCD Qatar · 360 Lead Solutions",
+    body:`<div class="mb-sec"><h4>CETEM</h4><p>Center of Excellence in Technology & Engineering Management — offshore senior tech talent to US companies via agile delivery.</p><a class="mb-link" href="https://cetem.canisrufus.org" target="_blank">cetem.canisrufus.org ↗</a></div>
+    <div class="mb-sec"><h4>PSDF Partnership</h4><p>Official Government of Pakistan training partner — subsidized programs across Punjab through 360 Lead Solutions.</p><a class="mb-link" href="http://360marketingzone.com" target="_blank">360marketingzone.com ↗</a></div>
+    <div class="mb-sec"><h4>QCCD Qatar</h4><p>Qatar Center for Career Development partnership — leadership and tech certifications to the Gulf market.</p><a class="mb-link" href="http://qccd.net" target="_blank">qccd.net ↗</a></div>
+    <div class="mb-sec"><h4>All Links</h4><a class="mb-link mb-link-ghost" href="http://sepm.alibinnadeem.com" target="_blank">SEPM ↗</a><a class="mb-link mb-link-ghost" href="https://alibinnadeem.notion.site/alibinnadeem/School-of-Excellence-in-Product-Management-SEPM-5c91ee379d8848cea58ad4dde64bb345" target="_blank">SEPM Notion ↗</a></div>`},
+  'cap-defence':{ey:"Capability",h:"Defence Technology",sub:"UAV · Counter-Drone · Tactical Systems",
+    body:`<div class="mb-sec"><h4>Overview</h4><p>Co-founded Pakistan's leading drone company in 2009. 15 years of modular, AI-driven UAV systems expanding into C-UAS for critical infrastructure.</p></div>
+    <div class="mb-sec"><h4>Systems</h4><ul><li>FPV, Reconnaissance, Heavy-Lift UAVs</li><li>War-Gaming Simulation Modules</li><li>ADS — CLASS I–V (40–120kg), 50–150ft span</li></ul></div>
+    <div class="mb-sec"><h4>Applications</h4><ul><li>Airspace denial · Critical infrastructure</li><li>Military FOBs · Airport perimeters</li><li>Government compounds · Diplomatic facilities</li></ul></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://canistechsol.vercel.app" target="_blank">Canis Technology ↗</a><a class="mb-link mb-link-ghost" href="https://alibinnadeem-ai.github.io/ADS-Buyer_portal/" target="_blank">ADS Configurator ↗</a><a class="mb-link mb-link-ghost" href="https://canistechsol.vercel.app/products" target="_blank">Products ↗</a><a class="mb-link mb-link-ghost" href="https://canistechsol.vercel.app/trainings" target="_blank">Trainings ↗</a></div>`},
+  'cap-health':{ey:"Capability",h:"Healthcare IT",sub:"RCM · Medical Billing · AI Clinical Analytics",
+    body:`<div class="mb-sec"><h4>Overview</h4><p>Founded My Health Aiyin (US healthcare RCM), Aiyin Inc. (Digital Twin IoT for safety), and Tectrybe (AI diagnostic applications) — a full-stack healthcare technology footprint.</p></div>
+    <div class="mb-sec"><h4>Stats</h4><div class="mb-stat"><div class="mb-stat-i"><div class="n">35+</div><div class="l">US Clients</div></div><div class="mb-stat-i"><div class="n">40%</div><div class="l">Claims Cost ↓</div></div><div class="mb-stat-i"><div class="n">26%</div><div class="l">Safety ↑ (IoT)</div></div></div></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://myhealthaiyin.framer.ai" target="_blank">My Health Aiyin ↗</a><a class="mb-link mb-link-ghost" href="https://showcasemyhealth.framer.ai" target="_blank">Showcase ↗</a><a class="mb-link mb-link-ghost" href="https://poplme.co/Myhealthaiyin" target="_blank">Business Card ↗</a><a class="mb-link mb-link-ghost" href="https://aiyin.us" target="_blank">Aiyin Inc. ↗</a></div>`},
+  'cap-re':{ey:"Capability",h:"Real Estate Tech & PropTech",sub:"ARD City · Qantara · Syntiant Atlas · RUDA",
+    body:`<div class="mb-sec"><h4>Overseas Director — ARD City</h4><p>Overseas Director for Corporate Relations at ARD City. Core product: Qantara Commercials — premium commercial units in RUDA Phase 1 targeting corporate investors and HNWIs.</p></div>
+    <div class="mb-sec"><h4>Syntiant Atlas CEO</h4><p>Pakistan's first blockchain fractional real estate platform — RWA tokenization from PKR 50,000 with smart contract governance.</p><div class="mb-stat"><div class="mb-stat-i"><div class="n">PKR 50K</div><div class="l">Min. Investment</div></div><div class="mb-stat-i"><div class="n">RWA</div><div class="l">Tokenization</div></div><div class="mb-stat-i"><div class="n">RUDA</div><div class="l">Phase 1</div></div></div></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://syntiantatlas-web.vercel.app" target="_blank">Syntiant Atlas ↗</a><a class="mb-link mb-link-ghost" href="https://theardcity.com" target="_blank">ARD City ↗</a><a class="mb-link mb-link-ghost" href="https://grandcity.pk" target="_blank">Grand City ↗</a><a class="mb-link mb-link-ghost" href="https://syntiantatlas-web.vercel.app/register" target="_blank">Start Investing ↗</a><a class="mb-link mb-link-ghost" href="https://binnadeemproperties.vercel.app" target="_blank">BN Properties ↗</a><a class="mb-link mb-link-ghost" href="https://ardcityadmindashboard.vercel.app" target="_blank">ARD Dashboard ↗</a></div>`},
+  caremyhealth:{ey:'Venture · BPO',h:'Care My Health Aiyin',sub:'Support BPO for US Healthcare',
+    body:`<div class="mb-sec"><h4>Overview</h4><p>The support BPO arm of My Health Aiyin — patient support, billing queries, and medical admin for US healthcare clients.</p></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://care.myhealth.aiyin.us/" target="_blank">care.myhealth.aiyin.us ↗</a><a class="mb-link mb-link-ghost" href="https://myhealthaiyin.framer.ai" target="_blank">My Health Aiyin ↗</a></div>`},
+  geartrybe:{ey:'Venture · US Automotive',h:'Gear Trybe',sub:'Premium Used Engines & Transmissions — San Jose, CA',
+    body:`<div class="mb-sec"><h4>Overview</h4><p>US-based premium used engines and transmissions. HQ: 1201 Parkmoor Ave, San Jose, CA 95126. Every engine: bench test, compression test, leak-down test. Nationwide shipping, extended warranty.</p></div>
+    <div class="mb-sec"><h4>Contact</h4><p>📞 +1 (408) 500 1113 · ✉️ info@geartrybe.aiyin.us</p></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="http://geartrybe.aiyin.us/" target="_blank">geartrybe.aiyin.us ↗</a><a class="mb-link mb-link-ghost" href="https://geartrybe-crm.netlify.app" target="_blank">Gear Trybe CRM ↗</a></div>`},
+  cyberx:{ey:'Venture · Technology Consulting',h:'CyberX Consulting',sub:'Enterprise IT Strategy & Cybersecurity',
+    body:`<div class="mb-sec"><h4>Overview</h4><p>CyberX Consulting delivers enterprise IT strategy, digital governance, and secure systems design. Ali holds a CTO-level role within the organisation.</p></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://cyberxconsulting.com/" target="_blank">cyberxconsulting.com ↗</a></div>`},
+  ksa:{ey:"Venture · Medical Equipment",h:"KSA International Corporation",sub:"Chief Technology Consultant — Pakistan's Largest Medical Equipment Supplier",
+    body:`<div class="mb-sec"><h4>Overview</h4><p>Pakistan's largest medical equipment supplier — new, refurbished and used equipment from GE, Siemens, Philips. Ali serves as Chief Technology Consultant overseeing evaluation and quality assurance.</p></div>
+    <div class="mb-sec"><h4>Scale</h4><div class="mb-stat"><div class="mb-stat-i"><div class="n">367</div><div class="l">Products</div></div><div class="mb-stat-i"><div class="n">204</div><div class="l">Categories</div></div><div class="mb-stat-i"><div class="n">100+</div><div class="l">Countries</div></div></div></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://ksainternationalcorporation.com/" target="_blank">ksainternationalcorporation.com ↗</a><a class="mb-link mb-link-ghost" href="https://www.ksainternationalcorporation.com/catalog" target="_blank">Catalog ↗</a></div>`},
+  axon:{ey:"Venture · Workforce Mobility",h:"Axon Global",sub:"Pakistan's End-to-End Workforce Mobility Platform",
+    body:`<div class="mb-sec"><h4>Overview</h4><p>Axon Global — train in Pakistan, work globally. HQ: Al-Malik Centre, Blue Area, Islamabad. Corridors: Japan (Specified Skilled Worker), UK, USA, Gulf, ANZ, Europe.</p></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://axon-global-74v0q6a.gamma.site/" target="_blank">axon-global.site ↗</a></div>`},
+  sepm:{ey:"Venture · Education",h:"School of Excellence in Product Management",sub:"12-week globally recognised PM certification",
+    body:`<div class="mb-sec"><h4>Overview</h4><p>12-week product management certification — portfolio projects, globally recognised credentials. Delivered via PSDF (Pakistan) and QCCD (Gulf).</p></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="http://sepm.alibinnadeem.com" target="_blank">sepm.alibinnadeem.com ↗</a><a class="mb-link mb-link-ghost" href="https://alibinnadeem.notion.site/School-of-Excellence-in-Product-Management-SEPM-5c91ee379d8848cea58ad4dde64bb345" target="_blank">SEPM on Notion ↗</a></div>`},
+  see:{ey:"Venture · Education",h:"SEE — School of Excellence for Entrepreneurs",sub:"Certification school for high-demand tech and healthcare skills",
+    body:`<div class="mb-sec"><h4>Programs</h4><ul><li>Python Programming</li><li>Cybersecurity</li><li>Artificial Intelligence</li><li>Medical Billing</li><li>Project Management</li></ul></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://see-entrepreneurs-2kq6dwo.gamma.site/" target="_blank">SEE School ↗</a></div>`},
+  bna:{ey:"Venture · Family Enterprise",h:"Bin Nadeem Associates",sub:"Business consultancy and construction advisory — Islamabad",
+    body:`<div class="mb-sec"><h4>Overview</h4><p>Family consultancy firm — business development, construction advisory, and partnership facilitation across the Rawalpindi-Islamabad corridor.</p></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://binnadeem.com/bnaconsultants/" target="_blank">binnadeem.com/bnaconsultants ↗</a></div>`},
+  pnbc:{ey:"Affiliation · New Zealand",h:"PNBC",sub:"Pakistan New Zealand Business Council — Member",
+    body:`<div class="mb-sec"><h4>Overview</h4><p>Ali is a member of the Pakistan New Zealand Business Council — fostering trade, investment, and economic collaboration between Pakistan and New Zealand/Aotearoa.</p></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://pnbc.co.nz/" target="_blank">pnbc.co.nz ↗</a><a class="mb-link mb-link-ghost" href="https://pnbc.co.nz/membership/" target="_blank">Membership ↗</a><a class="mb-link mb-link-ghost" href="https://www.facebook.com/MyPNBC/" target="_blank">Facebook ↗</a></div>`},
+  googletower:{ey:"Property · Rawalpindi-Islamabad",h:"Google Tower",sub:"Ali's personal office building — 3 resident tech companies",
+    body:`<div class="mb-sec"><h4>Overview</h4><p>Google Tower is Ali's own commercial office building on the Rawalpindi-Islamabad corridor — separate from AirBlue Mall in Saddar. Houses Aiyin Inc., My Health Aiyin, and Tectrybe Inc.</p></div>
+    <div class="mb-sec"><h4>Resident Companies</h4><ul><li>Aiyin Inc. — Enterprise Digital Twin and AI</li><li>My Health Aiyin — US medical billing and RCM</li><li>Tectrybe Inc. — AI software studio</li></ul></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://maps.app.goo.gl/89vCjB7o2qn88duWA" target="_blank">Google Maps ↗</a><a class="mb-link mb-link-ghost" href="https://aiyin.us" target="_blank">Aiyin Inc. ↗</a><a class="mb-link mb-link-ghost" href="https://myhealthaiyin.framer.ai" target="_blank">My Health Aiyin ↗</a><a class="mb-link mb-link-ghost" href="http://tectrybe.com" target="_blank">Tectrybe ↗</a></div>`},
+  airblue:{ey:"Real Estate · Family Partnership",h:"AirBlue Mall (MetroPole Mall)",sub:"Saddar, Rawalpindi — Separate from Google Tower",
+    body:`<div class="mb-sec"><h4>Overview</h4><p>AirBlue Mall — formerly MetroPole Mall — is in Saddar, Rawalpindi. Ali holds a family partnership stake. Completely separate building and entity from Google Tower on the Rawalpindi-Islamabad corridor. Multi-use complex: shops, offices, apartments, food court.</p></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://maps.app.goo.gl/c4MQShZ7yCzeJsCW9" target="_blank">Google Maps ↗</a><a class="mb-link mb-link-ghost" href="https://www.facebook.com/MetropoleMall/" target="_blank">Facebook ↗</a><a class="mb-link mb-link-ghost" href="https://www.instagram.com/metropolerwpofficial/" target="_blank">Instagram ↗</a><a class="mb-link mb-link-ghost" href="https://www.youtube.com/@Metropoleofficial" target="_blank">YouTube ↗</a><a class="mb-link mb-link-ghost" href="https://www.linkedin.com/company/metropoleofficial/posts/?feedView=all" target="_blank">LinkedIn ↗</a><a class="mb-link mb-link-ghost" href="https://inexpensive-egret-051.notion.site/Metropole-Mall-0c7a1400a4fd472487f49c0e3be029dd?pvs=143" target="_blank">Notion ↗</a></div>`},
+  'exp-grandcity':{ey:"Feb 2025 – Present",h:"Technology Consultant",sub:"Grand City HQ — Separate entity from ARD City",
+    body:`<div class="mb-sec"><h4>Overview</h4><p>Grand City HQ is a fully independent real estate township — entirely separate from ARD City. Ali built GrandX from scratch: CRM, ERP, case management, customer funnels, utility bills, and admin dashboards.</p></div>
+    <div class="mb-sec"><h4>Platforms Delivered</h4><ul><li>Grand City Admin Dashboard</li><li>Grand Customer Funnel</li><li>Grand Case Flow (Next.js + Neon)</li><li>Grand City Utility Bills</li><li>GrandX Admin — API management</li></ul></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://grandcity.pk" target="_blank">grandcity.pk ↗</a><a class="mb-link mb-link-ghost" href="https://grandcityadmindashboard.vercel.app" target="_blank">Admin Dashboard ↗</a><a class="mb-link mb-link-ghost" href="https://grandcaseflow.vercel.app" target="_blank">Case Flow ↗</a></div>`},
+  'exp-ardcity':{ey:"Feb 2025 – Present",h:"Technology Consultant",sub:"ARD City — Separate entity from Grand City",
+    body:`<div class="mb-sec"><h4>Overview</h4><p>ARD City is a separate real estate development by ARD Builders and Developers — not related to Grand City. Ali delivers 431-task transformation across 17 domains plus serves as Overseas Director for Corporate Relations representing Qantara Commercials (RUDA Phase 1).</p></div>
+    <div class="mb-sec"><h4>Platforms Delivered</h4><ul><li>ARD CRM, ARD Executive Command Center, RUDA EOS</li><li>ARD AMS, ARD Utility Bills, SiteTab</li></ul></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://theardcity.com" target="_blank">theardcity.com ↗</a><a class="mb-link mb-link-ghost" href="https://ardcrm.vercel.app" target="_blank">ARD CRM ↗</a><a class="mb-link mb-link-ghost" href="https://ard-command-center.vercel.app" target="_blank">Command Center ↗</a></div>`},
+  'svc-contact':{ey:"Let's Talk",h:"Start a Conversation",sub:"Tell me about your challenge — I'll respond within 24 hours",
+    body:`<div class="mb-sec"><h4>Get in touch</h4><p>Every engagement starts with a conversation. Tell me about your organisation, your challenge, and what you're hoping to achieve. No obligations, no sales pitch — just a direct, honest discussion about whether I'm the right fit.</p></div>
+    <div class="mb-sec"><h4>Contact Options</h4><ul><li>Email: ali@binnadeem.com</li><li>WhatsApp: +92 300 8540914</li><li>LinkedIn direct message — preferred for international clients</li></ul></div>
+    <div class="mb-sec"><h4>Typical response time</h4><div class="mb-stat"><div class="mb-stat-i"><div class="n">&lt;24h</div><div class="l">Email Response</div></div><div class="mb-stat-i"><div class="n">Same Day</div><div class="l">WhatsApp / LinkedIn</div></div><div class="mb-stat-i"><div class="n">PKT</div><div class="l">Rawalpindi, Pakistan</div></div></div></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://www.linkedin.com/in/alibinnadeem/" target="_blank">LinkedIn DM ↗</a><a class="mb-link mb-link-ghost" href="https://wa.me/923008540914" target="_blank">WhatsApp ↗</a><a class="mb-link mb-link-ghost" href="https://poplme.co/alibinnadeem" target="_blank">Digital Card ↗</a><a class="mb-link mb-link-ghost" href="mailto:ali@binnadeem.com">Email ↗</a></div>`},
+  'svc-digital':{ey:"Consulting Service",h:"Digital Transformation",sub:"End-to-end enterprise modernisation",
+    body:`<div class="mb-sec"><h4>What I deliver</h4><p>I take organisations from fragmented, manual processes to fully integrated digital operations — CRM, ERP, workflow automation, and command dashboards shaped by doing this live for Grand City (GrandX ecosystem) and ARD City (431-task transformation across 17 domains).</p></div>
+    <div class="mb-sec"><h4>Scope</h4><ul><li>Current-state audit and gap analysis</li><li>Phased digital transformation roadmap</li><li>CRM and ERP selection, configuration, deployment</li><li>Business process re-engineering and automation</li><li>Change management and staff adoption</li><li>KPI dashboards and real-time reporting</li></ul></div>
+    <div class="mb-sec"><h4>Proven results</h4><div class="mb-stat"><div class="mb-stat-i"><div class="n">17</div><div class="l">Domains (ARD City)</div></div><div class="mb-stat-i"><div class="n">431</div><div class="l">Tasks Delivered</div></div><div class="mb-stat-i"><div class="n">9+</div><div class="l">Live Platforms</div></div></div></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://theardcity.com" target="_blank">ARD City ↗</a><a class="mb-link mb-link-ghost" href="https://grandcity.pk" target="_blank">Grand City ↗</a><a class="mb-link mb-link-ghost" href="https://www.linkedin.com/in/alibinnadeem/" target="_blank">Discuss with Ali ↗</a></div>`},
+  'svc-ai':{ey:"Consulting Service",h:"AI Strategy & Product",sub:"From roadmap to production ML — end to end",
+    body:`<div class="mb-sec"><h4>What I deliver</h4><p>AI roadmapping grounded in business outcomes, ML pipeline design, predictive analytics, and intelligent automation. Applied across healthcare, defence, real estate, and enterprise SaaS — not theoretical.</p></div>
+    <div class="mb-sec"><h4>Scope</h4><ul><li>AI readiness assessment and use-case prioritisation</li><li>ML pipeline design and data architecture</li><li>Predictive analytics and forecasting systems</li><li>AI-powered product feature development</li><li>Intelligent process automation (IPA)</li><li>AI vendor selection and integration oversight</li></ul></div>
+    <div class="mb-sec"><h4>Applied examples</h4><ul><li>Digital Twin IoT — 32% downtime reduction (Aiyin Inc.)</li><li>AI clinical analytics for US healthcare RCM</li><li>Drone threat classification models (Canis ADS)</li><li>Geospatial ML SaaS — $200M+ platform (Coforge)</li></ul></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="http://altertec.ai" target="_blank">Altertec.ai ↗</a><a class="mb-link mb-link-ghost" href="https://aiyin.us" target="_blank">Aiyin Inc. ↗</a><a class="mb-link mb-link-ghost" href="https://www.linkedin.com/in/alibinnadeem/" target="_blank">Discuss with Ali ↗</a></div>`},
+  'svc-cto':{ey:"Consulting Service",h:"Fractional CTO",sub:"CTO-level leadership embedded in your team",
+    body:`<div class="mb-sec"><h4>What I deliver</h4><p>I join your leadership team part-time as your technology head — owning strategy, architecture, hiring, vendor relationships, and delivery. You get someone who has run technology across 11 simultaneous ventures, without the full-time executive cost.</p></div>
+    <div class="mb-sec"><h4>I take ownership of</h4><ul><li>Technology strategy and multi-year roadmap</li><li>Architecture and stack decisions</li><li>Engineering team hiring, structure, performance</li><li>Vendor selection, contracts, and oversight</li><li>Sprint delivery and product launch oversight</li><li>Technology due diligence for investors</li><li>Board and investor technology presentations</li></ul></div>
+    <div class="mb-sec"><h4>Ideal for</h4><ul><li>Series A/B startups without a full-time CTO</li><li>Growing SMEs undergoing digital transformation</li><li>Organisations preparing for a fundraising round</li><li>Companies with a technical team but no strategic leadership</li></ul></div>
+    <div class="mb-sec"><h4>Track record</h4><div class="mb-stat"><div class="mb-stat-i"><div class="n">11</div><div class="l">Ventures Operated</div></div><div class="mb-stat-i"><div class="n">41</div><div class="l">Live Systems Built</div></div><div class="mb-stat-i"><div class="n">15+</div><div class="l">Years Leading Tech</div></div></div></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://www.linkedin.com/in/alibinnadeem/" target="_blank">LinkedIn ↗</a><a class="mb-link mb-link-ghost" href="https://alibinnadeem-tn2tlmy.gamma.site" target="_blank">Full Portfolio ↗</a><a class="mb-link mb-link-ghost" href="https://wa.me/923008540914" target="_blank">WhatsApp ↗</a></div>`},
+  'svc-proptech':{ey:"Consulting Service",h:"Real Estate Tech & PropTech",sub:"Smart city · Developer CRM · RWA tokenization",
+    body:`<div class="mb-sec"><h4>What I deliver</h4><p>Technology infrastructure for modern real estate developers — sales CRM, customer portals, utility management, smart city dashboards, and blockchain investment platforms. All of this runs in production today for Grand City, ARD City, and Syntiant Atlas.</p></div>
+    <div class="mb-sec"><h4>Scope</h4><ul><li>Developer CRM and sales pipeline management</li><li>Customer portal and community platforms</li><li>Utility tracking and billing systems</li><li>Smart city IoT and command dashboards</li><li>Property management and tenant systems</li><li>RWA tokenization and fractional investment platforms</li><li>Overseas investor acquisition strategy and tooling</li></ul></div>
+    <div class="mb-sec"><h4>Live references</h4><ul><li>GrandX ecosystem — Grand City HQ (9 platforms)</li><li>ARD City command center suite</li><li>Syntiant Atlas — blockchain fractional RE</li><li>Qantara Commercials — RUDA Phase 1</li></ul></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://syntiantatlas-web.vercel.app" target="_blank">Syntiant Atlas ↗</a><a class="mb-link mb-link-ghost" href="https://grandcity.pk" target="_blank">Grand City ↗</a><a class="mb-link mb-link-ghost" href="https://theardcity.com" target="_blank">ARD City ↗</a><a class="mb-link mb-link-ghost" href="https://www.linkedin.com/in/alibinnadeem/" target="_blank">Discuss with Ali ↗</a></div>`},
+  'svc-defence':{ey:"Consulting Service",h:"Defence Technology Advisory",sub:"UAV · Counter-drone · Tactical tech strategy",
+    body:`<div class="mb-sec"><h4>What I deliver</h4><p>15 years co-founding Canis Technology Solutions gives me hands-on experience with every layer of the defence technology stack — from modular UAV hardware design to counter-drone procurement, tactical technology strategy, and defence tech product management.</p></div>
+    <div class="mb-sec"><h4>Advisory areas</h4><ul><li>UAV system architecture and modular design</li><li>Counter-drone (C-UAS) system procurement — CLASS I–V</li><li>ADS specifications and bill of quantities</li><li>Tactical technology product strategy</li><li>Defence procurement navigation (Pakistan + international)</li><li>War-gaming simulation module design</li><li>Drone training programme development</li></ul></div>
+    <div class="mb-sec"><h4>Standards expertise</h4><div class="mb-chips"><span class="mb-chip">NATO STANAG 4671</span><span class="mb-chip">ISO 2408 Wire Rope</span><span class="mb-chip">ASTM A500-B</span><span class="mb-chip">ETAG 027 Barrier</span><span class="mb-chip">ICAO Perimeter</span><span class="mb-chip">CPEC Compatibility</span></div></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://canistechsol.vercel.app" target="_blank">Canis Technology ↗</a><a class="mb-link mb-link-ghost" href="https://alibinnadeem-ai.github.io/ADS-Buyer_portal/" target="_blank">ADS Configurator ↗</a><a class="mb-link mb-link-ghost" href="https://wmpllc.org/ojs/index.php/jem/article/view/1207" target="_blank">Published Research ↗</a></div>`},
+  'svc-healthcare':{ey:"Consulting Service",h:"Healthcare IT Consulting",sub:"RCM · Medical billing · Clinical AI",
+    body:`<div class="mb-sec"><h4>What I deliver</h4><p>RCM setup, medical billing operations, credentialing, and clinical AI integration. My Health Aiyin's operational model — 35+ US clients, 40% claims cost reduction — is the direct blueprint I bring to new healthcare engagements.</p></div>
+    <div class="mb-sec"><h4>Scope</h4><ul><li>RCM setup and optimisation (end-to-end)</li><li>Medical billing workflow design and staffing</li><li>Provider credentialing management</li><li>AR management and denial reduction</li><li>Electronic claims submission systems</li><li>Clinical AI for documentation and analytics</li><li>HIPAA-compliant workflow architecture</li></ul></div>
+    <div class="mb-sec"><h4>Outcomes</h4><div class="mb-stat"><div class="mb-stat-i"><div class="n">40%</div><div class="l">Claims Cost ↓</div></div><div class="mb-stat-i"><div class="n">35+</div><div class="l">US Clients</div></div><div class="mb-stat-i"><div class="n">USA</div><div class="l">Market Expertise</div></div></div></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://myhealthaiyin.framer.ai" target="_blank">My Health Aiyin ↗</a><a class="mb-link mb-link-ghost" href="https://showcasemyhealth.framer.ai" target="_blank">Showcase ↗</a><a class="mb-link mb-link-ghost" href="https://poplme.co/Myhealthaiyin" target="_blank">Business Card ↗</a></div>`},
+  'svc-training':{ey:"Consulting Service",h:"Training & Capacity Building",sub:"SEPM · Agile · PSDF · QCCD Qatar",
+    body:`<div class="mb-sec"><h4>What I deliver</h4><p>Product management certifications, agile leadership programs, and digital transformation workshops — through SEPM, PSDF (Pakistan), and QCCD (Qatar). Custom corporate programs available.</p></div>
+    <div class="mb-sec"><h4>Programs</h4><ul><li>School of Excellence in Product Management (SEPM) — 12-week certification</li><li>Agile Scrum Master (ASM) — 4-week program</li><li>Technology for Managers — 6-week course</li><li>Digital Transformation Awareness — 2-day workshop</li><li>Custom in-house programs (corporate or institutional)</li></ul></div>
+    <div class="mb-sec"><h4>Delivery partners</h4><ul><li>PSDF — subsidised delivery across Punjab, Pakistan</li><li>QCCD — Gulf market programs</li><li>360 Lead Solutions — programme operations</li></ul></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="http://sepm.alibinnadeem.com" target="_blank">SEPM ↗</a><a class="mb-link mb-link-ghost" href="http://qccd.net" target="_blank">QCCD Qatar ↗</a><a class="mb-link mb-link-ghost" href="http://360marketingzone.com" target="_blank">360 Lead Solutions ↗</a><a class="mb-link mb-link-ghost" href="https://alibinnadeem.notion.site/alibinnadeem/School-of-Excellence-in-Product-Management-SEPM-5c91ee379d8848cea58ad4dde64bb345" target="_blank">SEPM on Notion ↗</a></div>`},
+  'svc-offshore':{ey:"Consulting Service",h:"Offshore Tech Teams (CETEM)",sub:"Senior Pakistan-based talent for US & international clients",
+    body:`<div class="mb-sec"><h4>What I deliver</h4><p>Through CETEM, I source, vet, and place senior Pakistan-based technology professionals with US and international companies — managing the full talent lifecycle so you get offshore capacity without the overhead.</p></div>
+    <div class="mb-sec"><h4>Included</h4><ul><li>Role scoping and candidate sourcing</li><li>Technical vetting and interview management</li><li>Onboarding and process alignment</li><li>Ongoing performance oversight</li><li>Agile delivery coordination across time zones</li></ul></div>
+    <div class="mb-sec"><h4>Typical roles</h4><ul><li>Full-stack: React, Next.js, Node.js, NestJS</li><li>Backend: Python, Java, .NET, PostgreSQL</li><li>DevOps: AWS, Azure, GCP</li><li>Product managers and technical project managers</li><li>QA engineers and data scientists</li></ul></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://cetem.canisrufus.org" target="_blank">CETEM ↗</a><a class="mb-link mb-link-ghost" href="https://wmpllc.org/ojs/index.php/jem/article/view/1207" target="_blank">CETEM Research ↗</a><a class="mb-link mb-link-ghost" href="https://www.linkedin.com/in/alibinnadeem/" target="_blank">Discuss with Ali ↗</a></div>`},
+  'svc-investment':{ey:"Consulting Service",h:"Investment & Qantara Commercials",sub:"Syntiant Atlas RWA · ARD City Overseas Corporate Relations",
+    body:`<div class="mb-sec"><h4>Syntiant Atlas — Fractional Real Estate</h4><p>Pakistan's first blockchain fractional real estate platform. Invest in tokenized RUDA Phase 1 properties from PKR 50,000 with smart contract security and token-weighted governance.</p><a class="mb-link" href="https://syntiantatlas-web.vercel.app/register" target="_blank">Start Investing ↗</a><a class="mb-link mb-link-ghost" href="https://syntiantatlas-web.vercel.app" target="_blank">Platform ↗</a><a class="mb-link mb-link-ghost" href="https://syntiantatlas-web.vercel.app/faq" target="_blank">FAQ ↗</a></div>
+    <div class="mb-sec"><h4>Qantara Commercials — ARD City</h4><p>As Overseas Director for Corporate Relations at ARD City, I facilitate introductions to Qantara Commercials — premium mixed-use commercial units in RUDA Phase 1. Corporate buyers, franchise operators, and overseas Pakistani investors.</p><a class="mb-link" href="https://theardcity.com" target="_blank">ARD City ↗</a><a class="mb-link mb-link-ghost" href="https://www.linkedin.com/in/alibinnadeem/" target="_blank">Request Intro ↗</a></div>
+    <div class="mb-sec"><h4>Metrics</h4><div class="mb-stat"><div class="mb-stat-i"><div class="n">PKR 50K</div><div class="l">Min. Syntiant</div></div><div class="mb-stat-i"><div class="n">RUDA</div><div class="l">Phase 1 Focus</div></div><div class="mb-stat-i"><div class="n">Blockchain</div><div class="l">Smart Contracts</div></div></div></div>`},
+
+  /* ── SEPARATE GRAND CITY & ARD CITY ── */
+  'exp-grandcity':{ey:"Feb 2025 – Present",h:"Technology Consultant",sub:"Grand City HQ — Separate entity from ARD City",
+    body:`<div class="mb-sec"><h4>Overview</h4><p>Grand City HQ is a fully independent real estate township — separate from ARD City. Ali serves as Technology Consultant, having built GrandX from scratch: CRM, ERP, case management, customer funnels, utility bills, and admin dashboards.</p></div>
+    <div class="mb-sec"><h4>Platforms</h4><ul><li>Grand City Admin Dashboard</li><li>Grand Customer Funnel</li><li>Grand Case Flow (Next.js + Neon)</li><li>Grand City Utility Bills</li><li>GrandX Admin — API management</li></ul></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://grandcity.pk" target="_blank">grandcity.pk ↗</a><a class="mb-link mb-link-ghost" href="https://grandcityadmindashboard.vercel.app" target="_blank">Admin Dashboard ↗</a><a class="mb-link mb-link-ghost" href="https://grandcaseflow.vercel.app" target="_blank">Case Flow ↗</a></div>`},
+  'exp-ardcity':{ey:"Feb 2025 – Present",h:"Technology Consultant",sub:"ARD City — Separate entity from Grand City",
+    body:`<div class="mb-sec"><h4>Overview</h4><p>ARD City is a separate real estate development by ARD Builders & Developers — not related to Grand City. Ali serves as Technology Consultant delivering 431-task transformation across 17 domains, and as Overseas Director for Corporate Relations representing Qantara Commercials (RUDA Phase 1).</p></div>
+    <div class="mb-sec"><h4>Platforms</h4><ul><li>ARD CRM · ARD Executive Command Center · RUDA EOS</li><li>ARD AMS · ARD Utility Bills · SiteTab</li></ul></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://theardcity.com" target="_blank">theardcity.com ↗</a><a class="mb-link mb-link-ghost" href="https://ardcrm.vercel.app" target="_blank">ARD CRM ↗</a><a class="mb-link mb-link-ghost" href="https://ard-command-center.vercel.app" target="_blank">Command Center ↗</a></div>`},
+
+  /* ── NEW PROPERTY MODALS ── */
+  'googletower':{ey:"Property · Rawalpindi-Islamabad",h:"Google Tower",sub:"Ali's personal office building — 3 resident tech companies",
+    body:`<div class="mb-sec"><h4>Overview</h4><p>Google Tower is Ali's own commercial office building on the Rawalpindi-Islamabad corridor — home to three of his operating companies: Aiyin Inc., My Health Aiyin, and Tectrybe Inc. This is a separate property from AirBlue Mall in Saddar.</p></div>
+    <div class="mb-sec"><h4>Resident Companies</h4><ul><li>Aiyin Inc. — Enterprise Digital Twin & AI</li><li>My Health Aiyin — US medical billing & RCM</li><li>Tectrybe Inc. — AI software studio</li></ul></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://maps.app.goo.gl/89vCjB7o2qn88duWA" target="_blank">Google Maps ↗</a><a class="mb-link mb-link-ghost" href="https://aiyin.us" target="_blank">Aiyin Inc. ↗</a><a class="mb-link mb-link-ghost" href="https://myhealthaiyin.framer.ai" target="_blank">My Health Aiyin ↗</a><a class="mb-link mb-link-ghost" href="http://tectrybe.com" target="_blank">Tectrybe ↗</a></div>`},
+  'airblue':{ey:"Real Estate · Family Partnership",h:"AirBlue Mall (MetroPole Mall)",sub:"Saddar, Rawalpindi — Separate from Google Tower",
+    body:`<div class="mb-sec"><h4>Overview</h4><p>AirBlue Mall — formerly MetroPole Mall — is in Saddar, Rawalpindi. Ali holds a family partnership stake. This is a completely separate building from Google Tower on the Rawalpindi-Islamabad corridor. A prime commercial landmark with shops, offices, apartments, and food court.</p></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://maps.app.goo.gl/c4MQShZ7yCzeJsCW9" target="_blank">Google Maps ↗</a><a class="mb-link mb-link-ghost" href="https://www.facebook.com/MetropoleMall/" target="_blank">Facebook ↗</a><a class="mb-link mb-link-ghost" href="https://www.instagram.com/metropolerwpofficial/" target="_blank">Instagram ↗</a><a class="mb-link mb-link-ghost" href="https://www.youtube.com/@Metropoleofficial" target="_blank">YouTube ↗</a><a class="mb-link mb-link-ghost" href="https://www.linkedin.com/company/metropoleofficial/posts/?feedView=all" target="_blank">LinkedIn ↗</a><a class="mb-link mb-link-ghost" href="https://inexpensive-egret-051.notion.site/Metropole-Mall-0c7a1400a4fd472487f49c0e3be029dd?pvs=143" target="_blank">Notion ↗</a></div>`},
+
+  /* ── NEW VENTURE MODALS ── */
+  'caremyhealth':{ey:"Venture · BPO",h:"Care My Health Aiyin",sub:"Support BPO for US Healthcare",
+    body:`<div class="mb-sec"><h4>Overview</h4><p>The support BPO arm of My Health Aiyin — patient support, billing queries, and medical admin for US healthcare clients.</p></div>
+    <div class="mb-sec"><h4>Services</h4><ul><li>Patient billing support and query resolution</li><li>Insurance eligibility and pre-authorization calls</li><li>Medical admin support for US providers</li></ul></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://care.myhealth.aiyin.us/" target="_blank">care.myhealth.aiyin.us ↗</a><a class="mb-link mb-link-ghost" href="https://myhealthaiyin.framer.ai" target="_blank">My Health Aiyin ↗</a></div>`},
+  'geartrybe':{ey:"Venture · US Automotive",h:"Gear Trybe",sub:"Premium Used Engines & Transmissions — San Jose, CA",
+    body:`<div class="mb-sec"><h4>Overview</h4><p>US-based premium used engines & transmissions supplier. HQ: 1201 Parkmoor Ave, San Jose, CA. Every engine: bench test, compression test, leak-down test. Nationwide shipping, extended warranty, quality certified.</p></div>
+    <div class="mb-sec"><h4>Contact</h4><p>📞 +1 (408) 500 1113 · ✉️ info@geartrybe.aiyin.us</p></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="http://geartrybe.aiyin.us/" target="_blank">geartrybe.aiyin.us ↗</a><a class="mb-link mb-link-ghost" href="https://geartrybe-crm.netlify.app" target="_blank">Gear Trybe CRM ↗</a><a class="mb-link mb-link-ghost" href="https://instagram.com/geartrybe" target="_blank">Instagram ↗</a></div>`},
+  'cyberx':{ey:"Venture · Technology Consulting",h:"CyberX Consulting",sub:"Enterprise IT Strategy & Cybersecurity Advisory",
+    body:`<div class="mb-sec"><h4>Overview</h4><p>CyberX Consulting delivers enterprise IT strategy, digital governance, and secure systems design. Ali holds a CTO-level role within the organisation.</p></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://cyberxconsulting.com/" target="_blank">cyberxconsulting.com ↗</a></div>`},
+  'ksa':{ey:"Venture · Medical Equipment",h:"KSA International Corporation",sub:"Chief Technology Consultant · Pakistan's Largest Medical Equipment Supplier",
+    body:`<div class="mb-sec"><h4>Overview</h4><p>Pakistan's largest medical equipment supplier — new, refurbished & used equipment from GE, Siemens, Philips. Ali serves as Chief Technology Consultant overseeing evaluation, refurbishment, and quality assurance.</p></div>
+    <div class="mb-sec"><h4>Scale</h4><div class="mb-stat"><div class="mb-stat-i"><div class="n">367</div><div class="l">Products</div></div><div class="mb-stat-i"><div class="n">204</div><div class="l">Categories</div></div><div class="mb-stat-i"><div class="n">100+</div><div class="l">Countries</div></div></div></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://ksainternationalcorporation.com/" target="_blank">ksainternationalcorporation.com ↗</a><a class="mb-link mb-link-ghost" href="https://www.ksainternationalcorporation.com/catalog" target="_blank">Catalog ↗</a><a class="mb-link mb-link-ghost" href="https://www.ksainternationalcorporation.com/quote" target="_blank">Quote ↗</a></div>`},
+  'axon':{ey:"Venture · Workforce Mobility",h:"Axon Global",sub:"Pakistan's End-to-End Workforce Mobility Platform",
+    body:`<div class="mb-sec"><h4>Overview</h4><p>Axon Global — train in Pakistan, work globally, bring remittances home. HQ: Al-Malik Centre, Blue Area, Islamabad. Structured talent export across Japan, UK, USA, Australia/NZ, Europe, and Gulf corridors.</p></div>
+    <div class="mb-sec"><h4>Corridors</h4><ul><li>🇯🇵 Japan — manufacturing, caregiving (primary)</li><li>🇬🇧 UK — healthcare, skilled migration</li><li>🇺🇸 USA — healthcare, IT, engineering</li><li>🌍 Gulf — high-volume deployment</li><li>🇦🇺 ANZ · 🇩🇪 Europe</li></ul></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://axon-global-74v0q6a.gamma.site/" target="_blank">axon-global.site ↗</a></div>`},
+  'sepm':{ey:"Venture · Education",h:"School of Excellence in Product Management",sub:"12-week globally recognised PM certification",
+    body:`<div class="mb-sec"><h4>Overview</h4><p>12-week product management certification — portfolio projects, globally recognised credentials, direct career pathways. Delivered via PSDF (Pakistan) and QCCD (Gulf).</p></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="http://sepm.alibinnadeem.com" target="_blank">sepm.alibinnadeem.com ↗</a><a class="mb-link mb-link-ghost" href="https://alibinnadeem.notion.site/School-of-Excellence-in-Product-Management-SEPM-5c91ee379d8848cea58ad4dde64bb345" target="_blank">SEPM on Notion ↗</a></div>`},
+  'see':{ey:"Venture · Education",h:"SEE — School of Excellence for Entrepreneurs",sub:"Certification school for high-demand tech & healthcare skills",
+    body:`<div class="mb-sec"><h4>Programs</h4><ul><li>Python Programming</li><li>Cybersecurity</li><li>Artificial Intelligence</li><li>Medical Billing</li><li>Project Management</li></ul></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://see-entrepreneurs-2kq6dwo.gamma.site/" target="_blank">SEE School ↗</a></div>`},
+  'bna':{ey:"Venture · Family Enterprise",h:"Bin Nadeem Associates",sub:"Business consultancy & construction advisory — Islamabad",
+    body:`<div class="mb-sec"><h4>Overview</h4><p>Family consultancy firm — business development, construction advisory, and partnership facilitation across the Rawalpindi-Islamabad corridor.</p></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://binnadeem.com/bnaconsultants/" target="_blank">binnadeem.com/bnaconsultants ↗</a></div>`},
+  'pnbc':{ey:"Affiliation · New Zealand",h:"PNBC",sub:"Pakistan New Zealand Business Council — Member",
+    body:`<div class="mb-sec"><h4>Overview</h4><p>Ali is a member of the Pakistan New Zealand Business Council (PNBC) — fostering trade, investment, and economic collaboration between Pakistan and New Zealand/Aotearoa. HQ: 586 Great South Road, Ellerslie, Auckland.</p></div>
+    <div class="mb-sec"><h4>Key Event</h4><p>Aotearoa Global Connect Summit 2026 — 26 June 2026.</p></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://pnbc.co.nz/" target="_blank">pnbc.co.nz ↗</a><a class="mb-link mb-link-ghost" href="https://pnbc.co.nz/membership/" target="_blank">Membership ↗</a><a class="mb-link mb-link-ghost" href="https://www.facebook.com/MyPNBC/" target="_blank">Facebook ↗</a></div>`},
+
+  'activityhub':{ey:"Project · Team Management",h:"ActivityHub Pro",sub:"Complete Team Management Solution",
+    body:`<div class="mb-sec"><h4>Overview</h4><p>ActivityHub Pro is a full-featured team management platform — covering activity tracking, scheduling, task management, and collaboration.</p></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://activityhub.vercel.app/" target="_blank">activityhub.vercel.app ↗</a></div>`},
+
+  'advancepm':{ey:"Project · AI Platform",h:"Advance AI Project Management",sub:"AI-powered project management",
+    body:`<div class="mb-sec"><h4>Overview</h4><p>AI-powered project management platform — intelligent task allocation, risk prediction, sprint planning, and delivery forecasting for modern teams.</p></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://advance-pm.vercel.app" target="_blank">advance-pm.vercel.app ↗</a></div>`},
+
+  'musamyhealth':{ey:"Project · Healthcare",h:"MedBilling Unified Solutions of America",sub:"US Medical Billing Platform",
+    body:`<div class="mb-sec"><h4>Overview</h4><p>MedBilling Unified Solutions of America — US medical billing and revenue management platform — end-to-end billing services for healthcare providers.</p></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://musamyhealth.com/" target="_blank">musamyhealth.com ↗</a></div>`},
+
+  'ledgerly':{ey:"Project · Finance",h:"Ledgerly Tax Pros",sub:"US Tax & Accounting Services",
+    body:`<div class="mb-sec"><h4>Overview</h4><p>Professional US tax and accounting services platform — compliance and financial management for individuals and businesses.</p></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://ledgerlytaxpros.com/" target="_blank">ledgerlytaxpros.com ↗</a></div>`},
+
+  'smilefactory':{ey:"Project · Dental Billing",h:"The Smile Factory DBS",sub:"Dental Billing Service — End-to-End RCM",
+    body:`<div class="mb-sec"><h4>Overview</h4><p>Dedicated dental billing service — end-to-end RCM, quick claim processing, cloud EHR integration, and profit maximisation for dental practices.</p></div>
+    <div class="mb-sec"><h4>Services</h4><ul><li>Quick Claim Processing</li><li>Cloud-Based EHR Integration</li><li>Revenue Cycle Management</li><li>Comprehensive analytics</li><li>24/7 customer support</li></ul></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="http://thesmilefactorydbs.com/" target="_blank">thesmilefactorydbs.com ↗</a></div>`},
+
+  'tactical':{ey:"Media · Defence",h:"Tactical Excellence in Military Technology",sub:"Canis Technology Solutions — Investor Deck",
+    body:`<div class="mb-sec"><h4>Overview</h4><p>Comprehensive Canis Technology Solutions deck — drone ecosystem, global UAV market ($73B 2024 → $163B 2030, 14.3% CAGR), product capabilities, AI roadmap, and financial projections.</p></div>
+    <div class="mb-sec"><h4>Market</h4><div class="mb-stat"><div class="mb-stat-i"><div class="n">$73B</div><div class="l">2024 Market</div></div><div class="mb-stat-i"><div class="n">$163B</div><div class="l">2030 Projection</div></div><div class="mb-stat-i"><div class="n">14.3%</div><div class="l">CAGR</div></div></div></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://tactical-excellence-in-m-z1g0vwm.gamma.site" target="_blank">View Deck ↗</a><a class="mb-link mb-link-ghost" href="https://canistechsol.vercel.app" target="_blank">Canis Technology ↗</a></div>`},
+
+  'media':{ey:"Media · Videos",h:"National TV Interview",sub:"Featured on National Television — entrepreneurship and tech leadership",
+    body:`<div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://www.youtube.com/watch?v=FCCeDuNruUE" target="_blank">YouTube ↗</a><a class="mb-link mb-link-ghost" href="https://www.dailymotion.com/video/x32v9ts" target="_blank">Dailymotion ↗</a><a class="mb-link mb-link-ghost" href="https://www.linkedin.com/in/alibinnadeem/details/featured/" target="_blank">LinkedIn Featured ↗</a></div>`},
+
+  'beaconhouse':{ey:"Alumni",h:"Beaconhouse Alumni",sub:"Beaconhouse School System",
+    body:`<div class="mb-sec"><h4>Overview</h4><p>Ali is an alumnus of Beaconhouse School System — Pakistan's leading private school network.</p></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="http://beaconhousealumni.org/" target="_blank">beaconhousealumni.org ↗</a></div>`},
+  ledgerly:{ey:"Venture · US Finance",h:"Ledgerly Tax Pros",sub:"Professional US Tax & Accounting Services",
+    body:`<div class="mb-sec"><h4>Overview</h4><p>Ledgerly Tax Pros is a professional US tax and accounting services platform — delivering compliance, financial management, and tax preparation for individuals and businesses in the United States.</p></div>
+    <div class="mb-sec"><h4>Services</h4><ul><li>Individual and business tax preparation</li><li>Year-round tax planning and compliance</li><li>Bookkeeping and financial management</li><li>IRS representation and support</li></ul></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://ledgerlytaxpros.com/" target="_blank">ledgerlytaxpros.com ↗</a></div>`},
+  smilefactory:{ey:"Venture · Dental Billing",h:"The Smile Factory DBS",sub:"Dental Billing Service — End-to-End RCM",
+    body:`<div class="mb-sec"><h4>Overview</h4><p>The Smile Factory DBS is a dedicated dental billing service delivering end-to-end Revenue Cycle Management — quick claim processing, cloud-based EHR integration, profit maximisation, and comprehensive analytics for dental practices.</p></div>
+    <div class="mb-sec"><h4>Services</h4><ul><li>Quick Claim Processing — at the speed of light</li><li>Cloud-Based EHR Integration with major systems</li><li>Revenue Cycle Management — claim submission to final payment</li><li>Comprehensive billing trend analytics</li><li>24/7 dedicated customer support</li></ul></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="http://thesmilefactorydbs.com/" target="_blank">thesmilefactorydbs.com ↗</a></div>`},
+  medbilling:{ey:"Venture · US Healthcare",h:"MedBilling Unified Solutions of America",sub:"US Medical Billing & Revenue Management",
+    body:`<div class="mb-sec"><h4>Overview</h4><p>MedBilling Unified Solutions of America is a US-market medical billing and revenue management platform — providing unified, end-to-end billing services for healthcare providers with advanced reporting and claims automation.</p></div>
+    <div class="mb-sec"><h4>Services</h4><ul><li>End-to-end medical billing and claims submission</li><li>Revenue cycle management and AR follow-up</li><li>Advanced analytics and billing dashboards</li><li>Compliance and credentialing support</li></ul></div>
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://musamyhealth.com/" target="_blank">musamyhealth.com ↗</a></div>`}
+};
+
+function openModal(id){
+  const m=modals[id];if(!m)return;
+  document.getElementById('modal-body').innerHTML=`<div class="mb-ey">${m.ey}</div><div class="mb-h">${m.h}</div><div class="mb-sub">${m.sub}</div>${m.body}`;
+  document.getElementById('modal-bg').classList.add('open');
+  document.body.style.overflow='hidden';
+  // Re-init tilt on modal open
+  document.querySelectorAll('.mb-link,.mb-link-ghost').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{ring.style.width='48px';ring.style.height='48px'});
+    el.addEventListener('mouseleave',()=>{ring.style.width='36px';ring.style.height='36px'});
+  });
+}
+function closeModal(){
+  document.getElementById('modal-bg').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+</script>
+</body>
+</html>

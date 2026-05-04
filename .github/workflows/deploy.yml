@@ -1,0 +1,79 @@
+name: ABN Consultant — Deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    name: Lint & Audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Enforce env file policy
+        run: |
+          set -e
+
+          if [ ! -f .gitignore ]; then
+            echo ".gitignore is required but missing"; exit 1
+          fi
+
+          if ! grep -q '^\.env$' .gitignore; then
+            echo "Missing strict .env ignore rule in .gitignore"; exit 1
+          fi
+
+          if ! grep -q '^\.env\.\*$' .gitignore; then
+            echo "Missing strict .env.* ignore rule in .gitignore"; exit 1
+          fi
+
+          tracked_env_files="$(git ls-files | grep -E '(^|/)\.env(\..*)?$' | grep -vE '(^|/)\.env\.example$' || true)"
+          if [ -n "$tracked_env_files" ]; then
+            echo "Tracked env files are not allowed:";
+            echo "$tracked_env_files";
+            exit 1
+          fi
+
+          echo "Environment file policy passed"
+      - uses: actions/setup-node@v4
+        with: { node-version: '22', cache: 'npm' }
+      - run: npm ci
+      - run: npm audit --audit-level=high
+      - name: Check for secrets
+        run: |
+          if grep -r "SMTP_PASS\|DB_PASSWORD\|JWT_SECRET\|CALENDLY_API_KEY" --include="*.js" pages/ lib/ database/ | grep -v "process.env"; then
+            echo "Hardcoded secret detected!"; exit 1
+          fi
+          echo "No hardcoded secrets found"
+
+  deploy:
+    name: Deploy to Production
+    needs: lint
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    environment:
+      name: production
+      url: https://consultant.alibinnadeem.com
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '22', cache: 'npm' }
+      - run: npm ci --omit=dev
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host:     ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key:      ${{ secrets.DEPLOY_SSH_KEY }}
+          script: |
+            set -e
+            cd /var/www/abn-consultant
+            git pull origin main
+            npm ci --omit=dev
+            node database/migrate.js
+            pm2 reload abn-consultant --env production
+            pm2 save
+            echo "✅ Consultant deployed at $(date '+%Y-%m-%d %H:%M:%S PKT')"
