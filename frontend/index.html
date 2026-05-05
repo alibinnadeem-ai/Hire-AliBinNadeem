@@ -18,6 +18,7 @@
 }
 html{scroll-behavior:smooth}
 body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--d1);color:#fff;-webkit-font-smoothing:antialiased;overflow-x:hidden;cursor:none}
+body.no-custom-cursor,body.no-custom-cursor *{cursor:auto!important}
 
 /* ── CUSTOM CURSOR ── */
 #cursor{position:fixed;z-index:9999;pointer-events:none;mix-blend-mode:screen}
@@ -251,6 +252,10 @@ footer{background:#000;border-top:1px solid rgba(255,255,255,.05);padding:48px 2
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 .rev{opacity:0;transform:translateY(28px) translateZ(-20px);transition:opacity .7s ease,transform .7s ease}
 .rev.vis{opacity:1;transform:translateY(0) translateZ(0)}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
 
 /* ── LIGHT SECTION ── */
 .light-sec{background:#fff;color:var(--ink)}
@@ -517,21 +522,21 @@ footer{background:#000;border-top:1px solid rgba(255,255,255,.05);padding:48px 2
       <div class="engage-name">Advisory Sprint</div>
       <div class="engage-desc">Intensive short-form engagement for a defined challenge — strategy, audit, or product review.</div>
       <ul class="engage-features"><li>2–4 week engagement</li><li>Technology audit or roadmap</li><li>Executive presentation of findings</li><li>Written recommendations report</li><li>2 follow-up sessions included</li></ul>
-      <button class="engage-btn ghost" onclick="openModal('svc-contact')">Get In Touch →</button>
+      <button class="engage-btn ghost" onclick="openModal('svc-contact',{selectedModel:'Advisory Sprint'})">Get In Touch →</button>
     </div>
     <div class="engage-card featured rev">
       <div class="engage-tier">Retainer</div>
       <div class="engage-name">Fractional CTO</div>
       <div class="engage-desc">Ongoing embedded leadership — I join your leadership team as your part-time technology head.</div>
       <ul class="engage-features"><li>3–12 month engagement</li><li>Weekly leadership participation</li><li>Full technology strategy ownership</li><li>Team hiring & vendor oversight</li><li>Architecture & delivery decisions</li><li>Investor/board tech presentations</li></ul>
-      <button class="engage-btn" onclick="openModal('svc-contact')">Discuss Engagement →</button>
+      <button class="engage-btn" onclick="openModal('svc-contact',{selectedModel:'Fractional CTO'})">Discuss Engagement →</button>
     </div>
     <div class="engage-card rev">
       <div class="engage-tier">Project</div>
       <div class="engage-name">Full Build</div>
       <div class="engage-desc">End-to-end technology delivery — from discovery through launch and handover.</div>
       <ul class="engage-features"><li>Fixed-scope or time & materials</li><li>Full system architecture</li><li>Developer team assembly & oversight</li><li>QA, deployment & DevOps</li><li>Documentation & team training</li><li>90-day post-launch support</li></ul>
-      <button class="engage-btn ghost" onclick="openModal('svc-contact')">Start Conversation →</button>
+      <button class="engage-btn ghost" onclick="openModal('svc-contact',{selectedModel:'Full Build'})">Start Conversation →</button>
     </div>
   </div>
 </section>
@@ -820,6 +825,9 @@ footer{background:#000;border-top:1px solid rgba(255,255,255,.05);padding:48px 2
 </div>
 
 <script>
+const prefersReducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const isFinePointer=window.matchMedia('(pointer: fine)').matches;
+
 /* ═══════════════════════════════════════
    CANVAS PARTICLE HERO — v3 exact port
    3200 pts · r=20-100 · fov=60 · z=60
@@ -828,16 +836,24 @@ footer{background:#000;border-top:1px solid rgba(255,255,255,.05);padding:48px 2
 (function(){
   const canvas=document.getElementById('hero-canvas');
   const ctx=canvas.getContext('2d');
+  if(!canvas||!ctx||prefersReducedMotion)return;
+
+  const DPR=Math.min(window.devicePixelRatio||1,1.5);
+  const isMobile=window.matchMedia('(max-width: 767px)').matches;
   function resize(){
     const h=document.getElementById('hero');
-    canvas.width=h.clientWidth;
-    canvas.height=h.clientHeight;
+    const w=h.clientWidth;
+    const hh=h.clientHeight;
+    canvas.width=Math.floor(w*DPR);
+    canvas.height=Math.floor(hh*DPR);
     canvas.style.width=h.clientWidth+'px';
     canvas.style.height=h.clientHeight+'px';
+    ctx.setTransform(DPR,0,0,DPR,0,0);
   }
   resize();
-  window.addEventListener('resize',resize);
-  const N=3200;
+  window.addEventListener('resize',resize,{passive:true});
+
+  const N=isMobile?900:1800;
   const pts=[];
   for(let i=0;i<N;i++){
     const r=20+Math.random()*80;
@@ -854,17 +870,17 @@ footer{background:#000;border-top:1px solid rgba(255,255,255,.05);padding:48px 2
     });
   }
   const linePairs=[];
-  for(let i=0;i<60;i++)
+  const lineCount=isMobile?24:48;
+  for(let i=0;i<lineCount;i++)
     linePairs.push([Math.floor(Math.random()*N),Math.floor(Math.random()*N)]);
   let mx=0,my=0,target={x:0,y:0};
-  document.addEventListener('mousemove',e=>{
-    mx=(e.clientX/window.innerWidth-0.5)*2;
-    my=-(e.clientY/window.innerHeight-0.5)*2;
-  });
-  function resize2(){
-    const h=document.getElementById('hero');
-    canvas.width=h.clientWidth;canvas.height=h.clientHeight;
+  if(isFinePointer){
+    document.addEventListener('mousemove',e=>{
+      mx=(e.clientX/window.innerWidth-0.5)*2;
+      my=-(e.clientY/window.innerHeight-0.5)*2;
+    },{passive:true});
   }
+
   let t=0;
   function animate(){
     requestAnimationFrame(animate);
@@ -896,7 +912,6 @@ footer{background:#000;border-top:1px solid rgba(255,255,255,.05);padding:48px 2
       if(!pa||!pb||pa.vz<8||pb.vz<8) continue;
       ctx.beginPath();ctx.moveTo(pa.px,pa.py);ctx.lineTo(pb.px,pb.py);ctx.stroke();
     }
-    out.sort((a,b)=>b.vz-a.vz);
     for(const{px,py,vz,p} of out){
       const r=Math.min(p.size*(300/vz)*0.5,7);
       if(r<0.25) continue;
@@ -919,35 +934,56 @@ footer{background:#000;border-top:1px solid rgba(255,255,255,.05);padding:48px 2
 const dot=document.getElementById('cur-dot');
 const ring=document.getElementById('cur-ring');
 let cx=0,cy=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{cx=e.clientX;cy=e.clientY;dot.style.left=cx+'px';dot.style.top=cy+'px';});
-(function animCursor(){
-  rx+=(cx-rx)*0.12;ry+=(cy-ry)*0.12;
-  ring.style.left=rx+'px';ring.style.top=ry+'px';
-  requestAnimationFrame(animCursor);
-})();
-document.querySelectorAll('a,button,.tilt-card,.xc,.rec,.ei,.pc,.pubc,.educ,.afc,.chip').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{ring.style.width='56px';ring.style.height='56px';ring.style.borderColor='rgba(41,151,255,.9)';dot.style.background=getComputedStyle(document.documentElement).getPropertyValue('--sky')});
-  el.addEventListener('mouseleave',()=>{ring.style.width='36px';ring.style.height='36px';ring.style.borderColor='rgba(41,151,255,.6)';dot.style.background='#fff'});
-});
+if(!isFinePointer||prefersReducedMotion){
+  document.body.classList.add('no-custom-cursor');
+  if(dot)dot.style.display='none';
+  if(ring)ring.style.display='none';
+}else{
+  document.addEventListener('mousemove',e=>{cx=e.clientX;cy=e.clientY;dot.style.left=cx+'px';dot.style.top=cy+'px';},{passive:true});
+  (function animCursor(){
+    rx+=(cx-rx)*0.12;ry+=(cy-ry)*0.12;
+    ring.style.left=rx+'px';ring.style.top=ry+'px';
+    requestAnimationFrame(animCursor);
+  })();
+  document.querySelectorAll('a,button,.tilt-card,.xc,.rec,.ei,.pc,.pubc,.educ,.afc,.chip').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{ring.style.width='56px';ring.style.height='56px';ring.style.borderColor='rgba(41,151,255,.9)';dot.style.background=getComputedStyle(document.documentElement).getPropertyValue('--sky')});
+    el.addEventListener('mouseleave',()=>{ring.style.width='36px';ring.style.height='36px';ring.style.borderColor='rgba(41,151,255,.6)';dot.style.background='#fff'});
+  });
+}
 
 /* ═══════════════════════════════════════
    3D TILT CARDS
 ═══════════════════════════════════════ */
-document.querySelectorAll('.tilt-card').forEach(card=>{
-  card.addEventListener('mousemove',e=>{
-    const r=card.getBoundingClientRect();
-    const x=(e.clientX-r.left)/r.width;
-    const y=(e.clientY-r.top)/r.height;
-    const rx_=-(y-0.5)*14;
-    const ry_=(x-0.5)*14;
-    card.style.transform=`perspective(800px) rotateX(${rx_}deg) rotateY(${ry_}deg) translateZ(8px) scale(1.02)`;
-    card.style.setProperty('--mx',`${x*100}%`);
-    card.style.setProperty('--my',`${y*100}%`);
+if(isFinePointer&&!prefersReducedMotion){
+  document.querySelectorAll('.tilt-card').forEach(card=>{
+    let rafId=0;
+    let mxCard=0;
+    let myCard=0;
+
+    card.addEventListener('mousemove',e=>{
+      const r=card.getBoundingClientRect();
+      mxCard=(e.clientX-r.left)/r.width;
+      myCard=(e.clientY-r.top)/r.height;
+      if(rafId)return;
+      rafId=requestAnimationFrame(()=>{
+        const rx_=-(myCard-0.5)*14;
+        const ry_=(mxCard-0.5)*14;
+        card.style.transform=`perspective(800px) rotateX(${rx_}deg) rotateY(${ry_}deg) translateZ(8px) scale(1.02)`;
+        card.style.setProperty('--mx',`${mxCard*100}%`);
+        card.style.setProperty('--my',`${myCard*100}%`);
+        rafId=0;
+      });
+    },{passive:true});
+
+    card.addEventListener('mouseleave',()=>{
+      if(rafId){
+        cancelAnimationFrame(rafId);
+        rafId=0;
+      }
+      card.style.transform='perspective(800px) rotateX(0deg) rotateY(0deg) translateZ(0) scale(1)';
+    });
   });
-  card.addEventListener('mouseleave',()=>{
-    card.style.transform='perspective(800px) rotateX(0deg) rotateY(0deg) translateZ(0) scale(1)';
-  });
-});
+}
 
 /* ═══════════════════════════════════════
    SCROLL REVEAL
@@ -967,11 +1003,17 @@ document.querySelectorAll('.rev').forEach(el=>obs.observe(el));
 /* ═══════════════════════════════════════
    PARALLAX SECTIONS
 ═══════════════════════════════════════ */
-window.addEventListener('scroll',()=>{
-  const y=window.scrollY;
-  const heroInner=document.querySelector('.hero-inner');
-  if(heroInner)heroInner.style.transform=`translateY(${y*0.28}px)`;
-});
+const heroInner=document.querySelector('.hero-inner');
+let parallaxRaf=0;
+if(heroInner&&!prefersReducedMotion){
+  window.addEventListener('scroll',()=>{
+    if(parallaxRaf)return;
+    parallaxRaf=requestAnimationFrame(()=>{
+      heroInner.style.transform=`translateY(${window.scrollY*0.18}px)`;
+      parallaxRaf=0;
+    });
+  },{passive:true});
+}
 
 /* ═══════════════════════════════════════
    MODAL DATA
@@ -1158,7 +1200,7 @@ const modals={
     body:`<div class="mb-sec"><h4>Get in touch</h4><p>Every engagement starts with a conversation. Tell me about your organisation, your challenge, and what you're hoping to achieve. No obligations, no sales pitch — just a direct, honest discussion about whether I'm the right fit.</p></div>
     <div class="mb-sec"><h4>Contact Options</h4><ul><li>Email: alibinnadeem.official@gmail.com</li><li>WhatsApp: +1 408 500 1113</li><li>LinkedIn direct message — preferred for international clients</li></ul></div>
     <div class="mb-sec"><h4>Typical response time</h4><div class="mb-stat"><div class="mb-stat-i"><div class="n">&lt;24h</div><div class="l">Email Response</div></div><div class="mb-stat-i"><div class="n">Same Day</div><div class="l">WhatsApp / LinkedIn</div></div><div class="mb-stat-i"><div class="n">PKT</div><div class="l">Rawalpindi, Pakistan</div></div></div></div>
-    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://www.linkedin.com/in/alibinnadeem/" target="_blank">LinkedIn DM ↗</a><a class="mb-link mb-link-ghost" href="https://wa.me/14085001113" target="_blank">WhatsApp ↗</a><a class="mb-link mb-link-ghost" href="https://poplme.co/alibinnadeem" target="_blank">Digital Card ↗</a><a class="mb-link mb-link-ghost" href="mailto:alibinnadeem.official@gmail.com">Email ↗</a></div>`},
+    <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://www.linkedin.com/in/alibinnadeem/" target="_blank">LinkedIn DM ↗</a><a class="mb-link mb-link-ghost" href="https://wa.me/14085001113" data-wa-link="true" target="_blank">WhatsApp ↗</a><a class="mb-link mb-link-ghost" href="https://poplme.co/alibinnadeem" target="_blank">Digital Card ↗</a><a class="mb-link mb-link-ghost" href="mailto:alibinnadeem.official@gmail.com">Email ↗</a></div>`},
   'svc-digital':{ey:"Consulting Service",h:"Digital Transformation",sub:"End-to-end enterprise modernisation",
     body:`<div class="mb-sec"><h4>What I deliver</h4><p>I take organisations from fragmented, manual processes to fully integrated digital operations — CRM, ERP, workflow automation, and command dashboards shaped by doing this live for Grand City (GrandX ecosystem) and ARD City (431-task transformation across 17 domains).</p></div>
     <div class="mb-sec"><h4>Scope</h4><ul><li>Current-state audit and gap analysis</li><li>Phased digital transformation roadmap</li><li>CRM and ERP selection, configuration, deployment</li><li>Business process re-engineering and automation</li><li>Change management and staff adoption</li><li>KPI dashboards and real-time reporting</li></ul></div>
@@ -1304,16 +1346,31 @@ const modals={
     <div class="mb-sec"><h4>Links</h4><a class="mb-link" href="https://musamyhealth.com/" target="_blank">musamyhealth.com ↗</a></div>`}
 };
 
-function openModal(id){
+function openModal(id,opts={}){
   const m=modals[id];if(!m)return;
   document.getElementById('modal-body').innerHTML=`<div class="mb-ey">${m.ey}</div><div class="mb-h">${m.h}</div><div class="mb-sub">${m.sub}</div>${m.body}`;
+
+  const selectedModel=(opts&&opts.selectedModel)?opts.selectedModel:'';
+  const waLink=document.querySelector('[data-wa-link="true"]');
+  if(waLink){
+    const defaultMessage='Hi Ali, I would like to discuss a project with you.';
+    const message=selectedModel
+      ?`Hi Ali, I am interested in the ${selectedModel} model. Can we discuss the next steps?`
+      :defaultMessage;
+    waLink.href=`https://wa.me/14085001113?text=${encodeURIComponent(message)}`;
+  }
+
   document.getElementById('modal-bg').classList.add('open');
   document.body.style.overflow='hidden';
   // Re-init tilt on modal open
-  document.querySelectorAll('.mb-link,.mb-link-ghost').forEach(el=>{
-    el.addEventListener('mouseenter',()=>{ring.style.width='48px';ring.style.height='48px'});
-    el.addEventListener('mouseleave',()=>{ring.style.width='36px';ring.style.height='36px'});
-  });
+  if(ring&&!document.body.classList.contains('no-custom-cursor')){
+    document.querySelectorAll('.mb-link,.mb-link-ghost').forEach(el=>{
+      if(el.dataset.cursorBound==='1')return;
+      el.addEventListener('mouseenter',()=>{ring.style.width='48px';ring.style.height='48px'});
+      el.addEventListener('mouseleave',()=>{ring.style.width='36px';ring.style.height='36px'});
+      el.dataset.cursorBound='1';
+    });
+  }
 }
 function closeModal(){
   document.getElementById('modal-bg').classList.remove('open');
